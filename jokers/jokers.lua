@@ -481,7 +481,7 @@ SMODS.Joker{
 
     calculate = function(self, card, context)
         if context.joker_main then
-            local not_scoring_count = 0
+            local non_scoring_count = 0
 
             for _, played_card in ipairs(context.full_hand) do
                 local is_scoring = false
