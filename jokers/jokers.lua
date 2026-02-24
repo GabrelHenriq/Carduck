@@ -45,28 +45,28 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = "teste_flush",
-    path = "j_sample_money.png",
+    key = "jackpot",
+    path = "j_jackpot.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
-    key = "sample_roomba",
-    path = "j_sample_roomba.png",
+    key = "device_friend",
+    path = "j_devicefriend.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
-    key = "sample_drunk_juggler",
-    path = "j_sample_drunk_juggler.png",
+    key = "tree",
+    path = "j_tree.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
-    key = "sample_hackerman",
+    key = "flushed",
     path = "j_sample_hackerman.png",
     px = 71,
     py = 95
@@ -93,6 +93,10 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Sound({
+    key = "p5critical",
+    path = "p5critical.ogg"
+})
 
 SMODS.Joker{
     key = "callingcard",                                  --name used by the joker.    
@@ -108,8 +112,8 @@ SMODS.Joker{
     soul_pos=nil,                                        --pos of a soul sprite.
     atlas = 'callingcard',                                --atlas name, single sprites are deprecated.
 
-    calculate = function(self, card, context)
-        -- Caso 1: Cartas sendo destruídas (Tarô, Trading Card, etc.)
+calculate = function(self, card, context)
+        -- Caso 1: Cartas sendo destruídas (Tarô, Trading Card, Shadow Jimbo)
         if context.remove_playing_cards and not context.blueprint then
             local face_cards_destroyed = 0
             for k, val in ipairs(context.removed) do
@@ -120,6 +124,10 @@ SMODS.Joker{
 
             if face_cards_destroyed > 0 then
                 card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_destroyed)
+                
+                -- TOQUE O SOM AQUI (Use o prefixo do seu mod se souber, ou tente assim:)
+                play_sound('sj_p5critical', 1, 0.5)
+
                 return {
                     message = localize('k_upgrade_ex'),
                     colour = G.C.MULT,
@@ -128,7 +136,7 @@ SMODS.Joker{
             end
         end
 
-        -- Caso 2: Cartas de Vidro quebrando durante a pontuação
+        -- Caso 2: Cartas de Vidro quebrando
         if context.cards_destroyed and not context.blueprint then
             local face_cards_shattered = 0
             for k, val in ipairs(context.glass_shattered) do
@@ -139,6 +147,10 @@ SMODS.Joker{
 
             if face_cards_shattered > 0 then
                 card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_shattered)
+                
+                -- TOQUE O SOM AQUI TAMBÉM
+                play_sound('sj_p5critical', 1, 0.5)
+
                 return {
                     message = localize('k_upgrade_ex'),
                     colour = G.C.MULT,
@@ -157,9 +169,7 @@ SMODS.Joker{
     end,
 
     loc_vars = function(self, info_queue, card)
-    -- O primeiro valor (#1#) é o ganho (0.5)
-    -- O segundo valor (#2#) é o XMult atual do cartão
-    return { vars = { card.ability.extra.gain, card.ability.extra.x_mult } }
+        return { vars = { card.ability.extra.gain, card.ability.extra.x_mult } }
     end
 }
 
@@ -273,19 +283,194 @@ calculate = function(self, card, context)
 }
 
 SMODS.Joker{
-    key = "teste_flush",
+    key = "jackpot",
+    config = { extra = { num_sevens = 3 } },
+    pos = { x = 0, y = 0 },
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = true,
+    effect = nil,
+    atlas = 'jackpot',
+    soul_pos = nil,
+
+calculate = function(self, card, context)
+        -- 'context.before' acontece quando você joga a mão, antes de pontuar
+        if context.before and not context.blueprint then
+            local sevens = {}
+            -- Percorre todas as cartas jogadas
+            for i = 1, #context.full_hand do
+                -- get_id() == 7 refere-se ao valor da carta 7
+                if context.full_hand[i]:get_id() == 7 then
+                    table.insert(sevens, context.full_hand[i])
+                end
+            end
+
+            -- Verifica se existem 3 ou mais 7s
+            if #sevens >= card.ability.extra.num_sevens then
+                for i = 1, #sevens do
+                    -- Transforma cada 7 em uma Carta da Sorte (Lucky Card)
+                    sevens[i]:set_ability(G.P_CENTERS.m_lucky, nil, true)
+                    
+                    -- Efeito visual de brilho em cada carta
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            sevens[i]:juice_up()
+                            return true
+                        end
+                    }))
+                end
+
+                -- Retorna uma mensagem flutuante sobre o Coringa
+                return {
+                    message = "Jackpot!",
+                    colour = G.C.MONEY,
+                    card = card
+                }
+            end
+        end
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.num_sevens } }
+    end
+}
+
+SMODS.Joker{
+    key = "device_friend",
+    config={ extra = { mult_mod = 3} },
+    pos = { x = 0, y = 0 },
+    rarity = 2,
+    cost = 8,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = true,
+    effect = nil,
+    atlas = 'device_friend',
+    soul_pos = nil,
+
+calculate = function(self, card, context)
+        -- O efeito deve disparar durante a pontuação principal (joker_main)
+        if context.joker_main then
+            local total_egg_value = 0
+            
+            -- 1. Percorre todos os coringas no seu inventário
+            for i = 1, #G.jokers.cards do
+                local other_joker = G.jokers.cards[i]
+                -- 2. Verifica se o coringa é o Ovo original (j_egg)
+                if other_joker.config.center.key == 'j_egg' then
+                    total_egg_value = total_egg_value + other_joker.sell_cost
+                end
+            end
+
+            -- 3. Se houver valor acumulado, aplica o multiplicador triplo
+            if total_egg_value > 0 then
+                return {
+                    mult = total_egg_value * card.ability.extra.mult_mod,
+                    card = card
+                }
+            end
+        end
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        local current_total_mult = 0
+        
+        -- Calculamos o valor em tempo real para a descrição
+        if G.jokers then
+            for i = 1, #G.jokers.cards do
+                if G.jokers.cards[i].config.center.key == 'j_egg' then
+                    current_total_mult = current_total_mult + (G.jokers.cards[i].sell_cost * card.ability.extra.mult_mod)
+                end
+            end
+        end
+
+        -- Retornamos as variáveis que serão usadas no seu arquivo de localização (en.lua / pt.lua)
+        return { vars = { card.ability.extra.mult_mod, current_total_mult } }
+    end
+}
+
+SMODS.Joker{
+    key = "tree",
+    config = { extra = { odds = 7 }}, -- d_size  = discard size, h_size = hand size. (HOWEVER, you can't have both on 1 joker!)
+    pos = { x = 0, y = 0 },
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = false,
+    eternal_compat = false,
+    unlocked = true,
+    discovered = true,
+    effect = nil,
+    atlas = 'tree',
+    soul_pos = nil,
+
+    calculate = function(self, card, context)
+        -- Gatilho: Início da Blind
+        if context.setting_blind and not context.blueprint then
+            
+            -- 1. Cálculo da chance de ser Negativo (1 em 7)
+            local is_negative = false
+            if pseudorandom('tree_negative') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                is_negative = true
+            end
+
+            -- 2. Verifica se há espaço para um novo coringa 
+            -- (Coringas Negativos ignoram o limite, por isso a condição 'or is_negative')
+            if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit or is_negative then
+                
+                -- Reserva o espaço no buffer
+                G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.4,
+                    func = function()
+                        -- Cria o Coringa Ovo (j_egg)
+                        local new_card = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_egg', 'tree')
+                        new_card:add_to_deck()
+                        
+                        -- Se a sorte bateu, aplica a edição Negativa
+                        if is_negative then
+                            new_card:set_edition('e_negative', true)
+                        end
+                        
+                        G.jokers:emplace(new_card)
+                        G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+                        return true
+                    end
+                }))
+
+                return {
+                    message = is_negative and ".ggE" or "Egg.",
+                    colour = G.C.BLUE,
+                    card = card
+                }
+            end
+        end
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds } }
+    end
+}
+
+SMODS.Joker{
+    key = "flushed",
     config={ extra = {poker_hand = 'Flush'} },
     loc_vars = function(self, info_queue, card)
         return { vars = { localize(card.ability.extra.poker_hand, 'poker_hands') } }
     end,
     pos = { x = 0, y = 0 },
-    rarity = 2,
-    cost = 6,
+    rarity = 3,
+    cost = 7,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
     discovered = true,
-    atlas = 'teste_flush',
+    atlas = 'flushed',
 
     calculate = function(self, card, context)
         if context.joker_main and next(context.poker_hands["Flush"]) and
@@ -302,104 +487,6 @@ SMODS.Joker{
                 colour = G.C.SECONDARY_SET.Tarot
                 }
             end
-    end
-}
-
-SMODS.Joker{
-    key = "sample_roomba",
-    config={ },
-    pos = { x = 0, y = 0 },
-    rarity = 2,
-    cost = 4,
-    blueprint_compat = true,
-    eternal_compat = false,
-    unlocked = true,
-    discovered = true,
-    effect = nil,
-    atlas = 'sample_roomba',
-    soul_pos = nil,
-
-        calculate = function(self, card, context)
-        if context.end_of_round and not (context.individual or context.repetition) then
-            local cleanable_jokers = {}
-
-            for i = 1, #G.jokers.cards do
-                if G.jokers.cards[i] ~= self then -- if joker is not itself 
-                    cleanable_jokers[#cleanable_jokers+1] = G.jokers.cards[i] -- add all other jokers into a array
-                end
-            end
-
-            local joker_to_clean = #cleanable_jokers > 0 and pseudorandom_element(cleanable_jokers, pseudoseed('clean')) or nil -- pick a random valid joker, or null if no valid jokers
-
-            if joker_to_clean then -- if we have a valid joker we can bump into
-                shakecard(joker_to_clean) -- simulate bumping into a card
-                if(joker_to_clean.edition) then --if joker has an edition
-                    if not joker_to_clean.edition.negative then --if joker is not negative
-                        joker_to_clean:set_edition(nil) -- clean the joker from it's edition
-                    end
-                end
-            end
-        end
-    end,
-
-    loc_vars = function(self, info_queue, card)
-        return { }
-    end
-}
-
-SMODS.Joker{
-    key = "sample_drunk_juggler",
-    config = { d_size = 1 }, -- d_size  = discard size, h_size = hand size. (HOWEVER, you can't have both on 1 joker!)
-    pos = { x = 0, y = 0 },
-    rarity = 2,
-    cost = 4,
-    blueprint_compat = true,
-    eternal_compat = false,
-    unlocked = true,
-    discovered = true,
-    effect = nil,
-    atlas = 'sample_drunk_juggler',
-    soul_pos = nil,
-
-    calculate = function(self, card, context)
-        return nil
-    end,
-
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.d_size, localize{type = 'name_text', key = 'tag_double', set = 'Tag'} } }
-    end
-}
-
-SMODS.Joker{
-    key = "sample_hackerman",
-    config = { repetitions = 1 },
-    pos = { x = 0, y = 0 },
-    rarity = 2,
-    cost = 4,
-    blueprint_compat = true,
-    eternal_compat = false,
-    unlocked = true,
-    discovered = true,
-    effect = nil,
-    atlas = 'sample_hackerman',
-    soul_pos = nil,
-
-    calculate = function(self, card, context)
-        if context.cardarea == G.play and context.repetition and (
-            context.other_card:get_id() == 6 or 
-            context.other_card:get_id() == 7 or 
-            context.other_card:get_id() == 8 or 
-            context.other_card:get_id() == 9) then
-            return {
-                message = localize('k_again_ex'),
-                repetitions = card.ability.repetitions,
-                card = self
-            }
-        end
-    end,
-
-    loc_vars = function(self, info_queue, card)
-        return { }
     end
 }
 

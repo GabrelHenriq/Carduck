@@ -30,7 +30,36 @@ return {
                     }
                 },
             },
-            j_sj_teste_flush = {
+            j_sj_jackpot = {
+                name = "Jackpot",
+                text = {
+                    {
+                        "Se a mão conter {C:attention}#1#{} ou mais {C:attention}7{}s,",
+                        "Aprimore os {C:attention}7{}s em {C:attention}Cartas da Sorte{}"
+                    }
+                },
+            },
+            j_sj_device_friend = {
+                name = "DEVICE_FRIEND",
+                text = {
+                    {
+                        "Ganha Mult igual a {C:attention}#1#x{} o valor de venda",
+                        "dos Coringas {C:attention}Ovo{}",
+                        "{C:inactive}(Atualmente {C:mult}+#2#{} {C:inactive} Mult)"
+                    }
+                },
+            },
+            j_sj_tree = {
+                name = "Árvore",
+                text = {
+                    {
+                        "Gera um Coringa {C:attention}Ovo{} no início do {C:attention}Blind{}",
+                        "{C:green}#1# em #2#{} de chance de gerar um {C:attention}Ovo{} {C:dark_edition}Negativo{}",
+                        "{C:inactive}{s:0.8}Tem um homem aqui, ele lhe oferece um ovo."
+                    }
+                },
+            },
+            j_sj_flushed = {
                 name = "Flushed",
                 text = {
                     {

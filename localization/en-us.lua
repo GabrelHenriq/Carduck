@@ -30,45 +30,42 @@ return {
                     }
                 },
             },
-            j_sj_teste_flush = {
+            j_sj_jackpot = {
+                name = "Jackpot",
+                text = {
+                    {
+                        "If the hand contains {C:attention}#1#{} or more {C:attention}7{}s,",
+                        "Enhance the {C:attention}7{}s to {C:attention}Lucky Cards{}"
+                    }
+                },
+            },
+            j_sj_device_friend = {
+                name = "DEVICE_FRIEND",
+                text = {
+                    {
+                        "Earns mult equal to {C:attention}#1#x{} the sell value",
+                        "of {C:attention}Egg{} Jokers",
+                        "{C:inactive}(Currently {C:mult}+#2#{} {C:inactive} Mult)"
+                    }
+                },
+            },
+            j_sj_tree = {
+                name = "Tree",
+                text = {
+                    {
+                        "Creates a {C:attention}Egg{} Joker on the Start of a {C:attention}Blind{}",
+                        "{C:green}#1# in #2#{} of creating a {C:dark_edition}Negative{} {C:attention}Egg{}",
+                        "{C:inactive}{s:0.8}There's a man here, he offers you an Egg."
+                    }
+                },
+            },
+            j_sj_flushed = {
                 name = "Flushed",
                 text = {
                     {
                         "If played hand contains a {C:attention}Flush{},",
                         "creates a {C:tarot}''The Lovers''{} card",
                         "{C:inactive}(Must have room)"
-                    }
-                },
-            },
-            j_sj_sample_roomba = {
-                name = "Sample Roomba",
-                text = {
-                    {
-                        "Attempts to remove edition",
-                        "from another Joker",
-                        "at the end of each round",
-                        "{C:inactive}(Foil, Holo, Polychrome)"
-                    }
-                },
-            },
-            j_sj_sample_drunk_juggler = {
-                name = "Sample Drunk Juggler",
-                text = {
-                    {
-                        "{C:red}+#1#{} discard,",
-                        "also here's some {X:legendary,C:white}text effects{}:",
-                        "{s:0.5} scaled down by 0.5",
-                        "{C:attention,T:tag_double}#2#",
-                    }
-                },
-            },
-            j_sj_sample_hackerman = {
-                name = "Sample Hackerman",
-                text = {
-                    {
-                        "Retrigger",
-                        "each played",
-                        "{C:attention}6{}, {C:attention}7{}, {C:attention}8{}, or {C:attention}9{}",
                     }
                 },
             },
