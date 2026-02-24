@@ -69,13 +69,12 @@ return {
                     }
                 },
             },
-            j_sj_sample_baroness = {
-                name = "Sample Baroness",
+            j_sj_lazy_bones = {
+                name = "lazy Bones",
                 text = {
                     {
-                        "Each {C:attention}Queen{}",
-                        "held in hand",
-                        "gives {X:mult,C:white} X#1# {} Mult",
+                        "{C:red}+5{} Mult for every card not scoring in",
+                        "played hand",
                     }
                 },
             },

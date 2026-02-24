@@ -60,12 +60,21 @@ return {
                 },
             },
             j_sj_flushed = {
-                name = "Flushed",
+                name = "Corado",
                 text = {
                     {
                         "Se a mão jogada contém um {C:attention}Flush{},",
                         "cria uma carta {C:tarot}''Os Amantes''{}",
                         "{C:inactive}(Deve ter espaço)"
+                    }
+                },
+            },
+            j_sj_lazy_bones = {
+                name = "Preguiçosso",
+                text = {
+                    {
+                        "{C:red}+5{} Mult para cada carta que não pontua",
+                        "na mão jogada",
                     }
                 },
             },

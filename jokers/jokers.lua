@@ -67,14 +67,14 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "flushed",
-    path = "j_sample_hackerman.png",
+    path = "j_flushed.png",
     px = 71,
     py = 95
 })
 
 SMODS.Atlas({
-    key = "sample_baroness",
-    path = "j_sample_baroness.png",
+    key = "lazy_bones",
+    path = "j_lazybones.png",
     px = 71,
     py = 95
 })
@@ -113,7 +113,7 @@ SMODS.Joker{
     atlas = 'callingcard',                                --atlas name, single sprites are deprecated.
 
 calculate = function(self, card, context)
-        -- Caso 1: Cartas sendo destruídas (Tarô, Trading Card, Shadow Jimbo)
+        -- destroy
         if context.remove_playing_cards and not context.blueprint then
             local face_cards_destroyed = 0
             for k, val in ipairs(context.removed) do
@@ -125,7 +125,7 @@ calculate = function(self, card, context)
             if face_cards_destroyed > 0 then
                 card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_destroyed)
                 
-                -- TOQUE O SOM AQUI (Use o prefixo do seu mod se souber, ou tente assim:)
+                -- sound
                 play_sound('sj_p5critical', 1, 0.5)
 
                 return {
@@ -136,7 +136,7 @@ calculate = function(self, card, context)
             end
         end
 
-        -- Caso 2: Cartas de Vidro quebrando
+        -- glass
         if context.cards_destroyed and not context.blueprint then
             local face_cards_shattered = 0
             for k, val in ipairs(context.glass_shattered) do
@@ -148,7 +148,7 @@ calculate = function(self, card, context)
             if face_cards_shattered > 0 then
                 card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_shattered)
                 
-                -- TOQUE O SOM AQUI TAMBÉM
+                -- sound
                 play_sound('sj_p5critical', 1, 0.5)
 
                 return {
@@ -159,7 +159,7 @@ calculate = function(self, card, context)
             end
         end
 
-        -- Caso 3: Aplicar o multiplicador na pontuação
+        -- mult
         if context.joker_main and card.ability.extra.x_mult > 1 then
             return {
                 x_mult = card.ability.extra.x_mult,
@@ -200,10 +200,8 @@ calculate = function(self, card, context)
                 if #face_cards_in_hand > 0 then
                     local card_to_destroy = pseudorandom_element(face_cards_in_hand, pseudoseed('shadowjimbo_dest'))
                     
-                    -- 1. Destruição Visual
                     card_to_destroy:start_dissolve()
                     
-                    -- 2. O PULO DO GATO: Avisa outros Coringas (como o Calling Card)
                     SMODS.calculate_context({remove_playing_cards = true, removed = {card_to_destroy}})
                     
                     return {
@@ -233,19 +231,13 @@ SMODS.Joker{
     atlas = 'arcanajoker',
 
 calculate = function(self, card, context)
-        -- Gatilho de uso de consumível
         if context.using_consumeable and not context.blueprint then
-            -- Verifica se é um Tarô
             if context.consumeable.ability.set == 'Tarot' then
                 
-                -- CÁLCULO DE SORTE: 1 em (odds)
-                -- Usamos G.GAME.probabilities.normal para que funcione com o Coringa 'Oops! All 6s'
                 if pseudorandom('arcanajoker') < G.GAME.probabilities.normal / card.ability.extra.odds then
                     
-                    -- Verifica se há espaço no inventário
                     if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
                         
-                        -- Reserva espaço
                         G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
                         
                         G.E_MANAGER:add_event(Event({
@@ -276,7 +268,6 @@ calculate = function(self, card, context)
         end
     end,
 
-    -- loc_vars para mostrar o número dinamicamente na descrição
     loc_vars = function(self, info_queue, card)
         return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds } }
     end        
@@ -297,24 +288,18 @@ SMODS.Joker{
     soul_pos = nil,
 
 calculate = function(self, card, context)
-        -- 'context.before' acontece quando você joga a mão, antes de pontuar
         if context.before and not context.blueprint then
             local sevens = {}
-            -- Percorre todas as cartas jogadas
             for i = 1, #context.full_hand do
-                -- get_id() == 7 refere-se ao valor da carta 7
                 if context.full_hand[i]:get_id() == 7 then
                     table.insert(sevens, context.full_hand[i])
                 end
             end
 
-            -- Verifica se existem 3 ou mais 7s
             if #sevens >= card.ability.extra.num_sevens then
                 for i = 1, #sevens do
-                    -- Transforma cada 7 em uma Carta da Sorte (Lucky Card)
                     sevens[i]:set_ability(G.P_CENTERS.m_lucky, nil, true)
                     
-                    -- Efeito visual de brilho em cada carta
                     G.E_MANAGER:add_event(Event({
                         func = function()
                             sevens[i]:juice_up()
@@ -323,7 +308,6 @@ calculate = function(self, card, context)
                     }))
                 end
 
-                -- Retorna uma mensagem flutuante sobre o Coringa
                 return {
                     message = "Jackpot!",
                     colour = G.C.MONEY,
@@ -353,20 +337,16 @@ SMODS.Joker{
     soul_pos = nil,
 
 calculate = function(self, card, context)
-        -- O efeito deve disparar durante a pontuação principal (joker_main)
         if context.joker_main then
             local total_egg_value = 0
             
-            -- 1. Percorre todos os coringas no seu inventário
             for i = 1, #G.jokers.cards do
                 local other_joker = G.jokers.cards[i]
-                -- 2. Verifica se o coringa é o Ovo original (j_egg)
                 if other_joker.config.center.key == 'j_egg' then
                     total_egg_value = total_egg_value + other_joker.sell_cost
                 end
             end
 
-            -- 3. Se houver valor acumulado, aplica o multiplicador triplo
             if total_egg_value > 0 then
                 return {
                     mult = total_egg_value * card.ability.extra.mult_mod,
@@ -379,7 +359,6 @@ calculate = function(self, card, context)
     loc_vars = function(self, info_queue, card)
         local current_total_mult = 0
         
-        -- Calculamos o valor em tempo real para a descrição
         if G.jokers then
             for i = 1, #G.jokers.cards do
                 if G.jokers.cards[i].config.center.key == 'j_egg' then
@@ -388,7 +367,6 @@ calculate = function(self, card, context)
             end
         end
 
-        -- Retornamos as variáveis que serão usadas no seu arquivo de localização (en.lua / pt.lua)
         return { vars = { card.ability.extra.mult_mod, current_total_mult } }
     end
 }
@@ -408,31 +386,28 @@ SMODS.Joker{
     soul_pos = nil,
 
     calculate = function(self, card, context)
-        -- Gatilho: Início da Blind
         if context.setting_blind and not context.blueprint then
             
-            -- 1. Cálculo da chance de ser Negativo (1 em 7)
             local is_negative = false
             if pseudorandom('tree_negative') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 is_negative = true
             end
 
-            -- 2. Verifica se há espaço para um novo coringa 
-            -- (Coringas Negativos ignoram o limite, por isso a condição 'or is_negative')
+
             if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit or is_negative then
                 
-                -- Reserva o espaço no buffer
+
                 G.GAME.joker_buffer = G.GAME.joker_buffer + 1
                 
                 G.E_MANAGER:add_event(Event({
                     trigger = 'after',
                     delay = 0.4,
                     func = function()
-                        -- Cria o Coringa Ovo (j_egg)
+
                         local new_card = create_card('Joker', G.jokers, nil, nil, nil, nil, 'j_egg', 'tree')
                         new_card:add_to_deck()
                         
-                        -- Se a sorte bateu, aplica a edição Negativa
+
                         if is_negative then
                             new_card:set_edition('e_negative', true)
                         end
@@ -491,40 +466,48 @@ SMODS.Joker{
 }
 
 SMODS.Joker{
-    key = "sample_baroness",
-    config = { extra = { x_mult = 1.5 } },
+    key = "lazy_bones",
+    config = { extra = { mult = 15 } },
     pos = { x = 0, y = 0 },
-    rarity = 3,
-    cost = 8,
+    rarity = 1,
+    cost = 5,
     blueprint_compat = true,
-    eternal_compat = false,
+    eternal_compat = true,
     unlocked = true,
     discovered = true,
     effect = nil,
-    atlas = 'sample_baroness',
+    atlas = 'lazy_bones',
     soul_pos = nil,
 
     calculate = function(self, card, context)
-        if not context.end_of_round then
-            if context.cardarea == G.hand and context.individual and context.other_card:get_id() == 12 then
-                if context.other_card.debuff then
-                    return {
-                        message = localize('k_debuffed'),
-                        colour = G.C.RED,
-                        card = self,
-                    }
-                else
-                    return {
-                        x_mult = card.ability.extra.x_mult,
-                        card = self
-                    }
+        if context.joker_main then
+            local not_scoring_count = 0
+
+            for _, played_card in ipairs(context.full_hand) do
+                local is_scoring = false
+                for _, scoring_card in ipairs(context.scoring_hand) do
+                    if played_card == scoring_card then
+                        is_scoring = true
+                        break
+                    end
                 end
+                
+                if not is_scoring then
+                    non_scoring_count = non_scoring_count + 1
+                end
+            end
+
+            if non_scoring_count > 0 then
+                return {
+                    mult = non_scoring_count * card.ability.extra.mult,
+                    card = card
+                }
             end
         end
     end,
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.x_mult } }
+        return { vars = { card.ability.extra.mult } }
     end
 }
 
