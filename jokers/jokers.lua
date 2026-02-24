@@ -467,7 +467,7 @@ SMODS.Joker{
 
 SMODS.Joker{
     key = "lazy_bones",
-    config = { extra = { mult = 15 } },
+    config = { extra = { mult = 5 } },
     pos = { x = 0, y = 0 },
     rarity = 1,
     cost = 5,
