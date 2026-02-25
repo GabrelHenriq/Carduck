@@ -668,7 +668,7 @@ SMODS.Joker{
     key = "loyal_joker",
     config = { extra = { poker_hand = 'Full House', chips = 15 } },
     loc_vars = function(self, info_queue, card)
-        return { vars = { localize(card.ability.extra.poker_hand, 'poker_hands', card.ability.extra.chips ) } }
+        return { vars = { card.ability.extra.poker_hand, 'poker_hands', card.ability.extra.chips } }
     end,
     pos = { x = 0, y = 0 },
     rarity = 2,
@@ -680,18 +680,18 @@ SMODS.Joker{
     discovered = true,
     atlas = "loyal_joker",
     calculate = function(self, card, context)
-            if context.individual and context.cardarea == G.play and next(context.poker_hands["Full House"]) then
+        if context.individual and context.cardarea == G.play then
+            if context.poker_hands and next(context.poker_hands["Full House"]) then
                 
                 play_sound('sj_barkdog', 1, 0.5)
 
-                context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) +
-                    
-
-                    card.ability.extra.chips
+                context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) + card.ability.extra.chips
+                
                 return {
-                    message = localize('k_upgrade_ex'),
-                    colour = G.C.CHIPS
-            }
+                    extra = { focus = context.other_card, message = localize('k_upgrade_ex'), colour = G.C.CHIPS },
+                    card = card
+                }
+            end
         end
     end
 }
