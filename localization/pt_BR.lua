@@ -115,6 +115,15 @@ return {
                     }
                 },
             },
+            j_sj_loyal_joker = {
+                name = "Curinga leal",
+                text = {
+                    {
+                        "Se a mão jogada contém um {C:attention}Full House{},",
+                        "as cartas jogadas ganham {C:blue}+#2#{} Fichas permanentes"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

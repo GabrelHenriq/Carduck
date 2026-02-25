@@ -116,6 +116,15 @@ return {
                     }
                 },
             },
+            j_sj_loyal_joker = {
+                name = "loyal Joker",
+                text = {
+                    {
+                        "If played hand contains a {C:attention}Full House{},",
+                        "Played cards earn {C:blue}+#2#{} Chips permanently"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

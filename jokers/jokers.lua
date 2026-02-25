@@ -102,7 +102,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "loyal_joker",
-    path = "j_sample_multieffect.png",
+    path = "j_loyal.png",
     px = 71,
     py = 95
 })
@@ -117,6 +117,11 @@ SMODS.Atlas({
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
+})
+
+SMODS.Sound({
+    key = "barkdog",
+    path = "barkdog.ogg"
 })
 
 SMODS.Joker{
@@ -146,10 +151,10 @@ calculate = function(self, card, context)
             if face_cards_destroyed > 0 then
                 card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_destroyed)
                 
-                -- sound
-                play_sound('sj_p5critical', 1, 0.5)
+                
 
                 return {
+                    play_sound('sj_p5critical', 1, 0.5)
                     message = localize('k_upgrade_ex'),
                     colour = G.C.MULT,
                     card = card
@@ -679,6 +684,7 @@ SMODS.Joker{
                 context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) +
                     card.ability.extra.chips
                 return {
+                    play_sound('sj_barkdog', 1, 0.5)
                     message = localize('k_upgrade_ex'),
                     colour = G.C.CHIPS
             }
