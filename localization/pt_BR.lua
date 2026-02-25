@@ -115,16 +115,18 @@ return {
                     }
                 },
             },
+        }
+        Back = {
             b_sj_metadeck = {
-                name = "Deck do Metaverso",
+                name = "Metaverse Deck",
                 text = {
                     {
-                        "Começa com {C:red}Cartão de Aviso{} e",
-                        "{C:blue}Sombra do Jimbo{},",
-                        "{C:attention}Começa sem cartas de Realeza{}"
+                        "Start with {C:red}Calling Card{} and",
+                        "{C:blue}Jimbo's Shadow{},",
+                        "{C:attention}No face cards on start{}"
                     }
                 },
             },
         }
-    }
+    },
 }
