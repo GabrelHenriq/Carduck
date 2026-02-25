@@ -682,7 +682,7 @@ SMODS.Joker{
     calculate = function(self, card, context)
             if context.individual and context.cardarea == G.play and next(context.poker_hands["Full House"]) then
                 
-                play_sound('sj_barkdog', 1, 0.5),
+                play_sound('sj_barkdog', 1, 0.5)
 
                 context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) +
                     
