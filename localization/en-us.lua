@@ -116,8 +116,19 @@ return {
                     }
                 },
             },
+            b_meta_deck = {
+                name = "Metaverse Deck",
+                text = {
+                    {
+                        "Start with {C:red}Calling Card{} and",
+                        "{C:blue}Jimbo's Shadow{},",
+                        "{C:attention}No face cards on start{}"
+                    }
+                },
+            },
         }
     },
+    
     misc = {
 
             -- do note that when using messages such as: 
