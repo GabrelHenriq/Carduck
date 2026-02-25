@@ -1,6 +1,13 @@
 # CARDUCK
 ![ModBanner](https://github.com/GabrelHenriq/Carduck/blob/main/modbanner.png?raw=true)
 
+<p float="center">
+  <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_devicefriend.png?raw=true" width="100" />
+  <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_flushed.png?raw=true" width="100" /> 
+  <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_shadowjimbo.png?raw=true" width="100" />
+</p>
+
+
 ## ENGLISH:
 What do you get when you mix a **CAR** and a **DUCK**?\
 *No No No!* No need to answer! Because the answer is **HERE**!\
@@ -27,7 +34,7 @@ incluindo **UM MONTE DE REFERÊNCIAS!**\
 Então? o que está esperando?\
 Instale agora no seu ***B a l a t r o***, pelo **ULTRAJANTE** preço de **NADA!!!**
 
-<p float="left">
+<p float="center">
   <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_callingcard.png?raw=true" width="100" />
   <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_lazybones.png?raw=true" width="100" /> 
   <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_arcanajoker.png?raw=true" width="100" />
