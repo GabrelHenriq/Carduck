@@ -1,6 +1,6 @@
 # CARDUCK
 ![ModBanner](https://github.com/GabrelHenriq/Carduck/blob/main/modbanner.png?raw=true)
-
+# REQUIRES STEAMODDED|REQUER STEAMODDED
 <p align="center">
   <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_devicefriend.png?raw=true" width="100" />
   <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_flushed.png?raw=true" width="100" /> 
