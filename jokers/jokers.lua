@@ -101,6 +101,13 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
+    key = "loyal_joker",
+    path = "j_sample_multieffect.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
     key = "alok",
     path = "j_alok.png",
     px = 71,
@@ -647,6 +654,33 @@ SMODS.Joker{
         if context.joker_main then 
             return {
                 mult = card.ability.extra.mult
+            }
+        end
+    end
+}
+
+SMODS.Joker{
+    key = "loyal_joker",
+    config = { extra = { poker_hand = 'Full House', chips = 15 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { localize(card.ability.extra.poker_hand, 'poker_hands', card.ability.extra.chips ) } }
+    end,
+    pos = { x = 0, y = 0 },
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = true,
+    unlocked = true,
+    discovered = true,
+    atlas = "loyal_joker",
+    calculate = function(self, card, context)
+            if context.individual and context.cardarea == G.play and next(context.poker_hands["Full House"]) then
+                context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) +
+                    card.ability.extra.chips
+                return {
+                    message = localize('k_upgrade_ex'),
+                    colour = G.C.CHIPS
             }
         end
     end
