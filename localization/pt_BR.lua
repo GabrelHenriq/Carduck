@@ -115,7 +115,7 @@ return {
                     }
                 },
             },
-            b_meta_deck = {
+            b_sj_metadeck = {
                 name = "Deck do Metaverso",
                 text = {
                     {

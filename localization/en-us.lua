@@ -116,7 +116,7 @@ return {
                     }
                 },
             },
-            b_meta_deck = {
+            b_sj_metadeck = {
                 name = "Metaverse Deck",
                 text = {
                     {
