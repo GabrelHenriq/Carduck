@@ -120,12 +120,10 @@ return {
             b_sj_metadeck = {
                 name = "Metaverse Deck",
                 text = {
-                    {
                         "Start with {C:red}Calling Card{} and",
                         "{C:blue}Jimbo's Shadow{},",
                         "{C:attention}No face cards on start{}"
-                    }
-                },
+                    },
             },
         },
     }
