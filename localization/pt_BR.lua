@@ -4,7 +4,7 @@ return {
             j_sj_callingcard = {
                 name = "Cartão de Aviso",
                 text = {
-                    "Esse coringa ganha {X:mult,C:white}X#1#{} Mult",
+                    "Este curinga ganha {X:mult,C:white}X#1#{} Mult",
                     "para cada carta de {C:attention}realeza{}",
                     "que você {C:red}destrói{}",
                     "{C:inactive}(Atualmente {X:mult,C:white} X#2# {C:inactive} Mult)"
@@ -44,7 +44,7 @@ return {
                 text = {
                     {
                         "Ganha Mult igual a {C:attention}#1#x{} o valor de venda",
-                        "dos Coringas {C:attention}Ovo{}",
+                        "dos Curingas {C:attention}Ovo{}",
                         "{C:inactive}(Atualmente {C:mult}+#2#{} {C:inactive} Mult)"
                     }
                 },
@@ -53,7 +53,7 @@ return {
                 name = "Árvore",
                 text = {
                     {
-                        "Gera um Coringa {C:attention}Ovo{} no início do {C:attention}Blind{}",
+                        "Gera um Curinga {C:attention}Ovo{} no início do {C:attention}Blind{}",
                         "{C:green}#1# em #2#{} de chance de gerar um {C:attention}Ovo{} {C:dark_edition}Negativo{}",
                         "{C:inactive}{s:0.8}Tem um homem aqui, ele lhe oferece um ovo."
                     }
