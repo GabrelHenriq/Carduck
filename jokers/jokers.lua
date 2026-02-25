@@ -767,19 +767,23 @@ SMODS.Joker{
     atlas = 'repetition',
 
     calculate = function(self, card, context)
+        -- Rodar após a mão ser pontuada
         if context.after and not context.blueprint then
+
+            -- 1. Aplicação de Selo (Substituição Direta na Memória)
             if context.scoring_hand then
                 for i = 1, #context.scoring_hand do
                     local sc = context.scoring_hand[i]
                     if sc and not sc.removed then
+                        -- Em vez de sc:set_seal, alteramos a variável diretamente
+                        sc.ability.seal = 'Red' 
+                        
+                        -- Adicionamos apenas o efeito visual de brilho (seguro)
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
                             delay = 0.1,
                             func = function()
-                                if sc and sc.ability then 
-                                    sc:set_seal('red', true, true)
-                                    sc:juice_up()
-                                end
+                                sc:juice_up()
                                 return true
                             end
                         }))
@@ -787,6 +791,7 @@ SMODS.Joker{
                 end
             end
 
+            -- 2. Destruição de cartas na mão (Sinergia com Calling Card)
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.5,
@@ -795,6 +800,7 @@ SMODS.Joker{
                     if G.hand and G.hand.cards then
                         for i = #G.hand.cards, 1, -1 do
                             local c = G.hand.cards[i]
+                            -- Se for uma figura, o Calling Card vai detectar a destruição aqui
                             if destroyed_count < card.ability.extra.cards_to_destroy and c and not c.removed then
                                 c:start_dissolve()
                                 destroyed_count = destroyed_count + 1
@@ -805,6 +811,7 @@ SMODS.Joker{
                 end
             }))
 
+            -- 3. Auto-destruição do Repetition
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.7,
