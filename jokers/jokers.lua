@@ -93,6 +93,20 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "encantado",
+    path = "j_sample_multieffect.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "alok",
+    path = "j_alok.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
