@@ -128,7 +128,7 @@ return {
                 name = "Engenheiro",
                 text = {
                     {
-                        "{C:attention}Cartas de Ferro{} Jogadas",
+                        "{C:attention}Cartas de Aço{} Jogadas",
                         "Dão {X:mult,C:white}X#1#{} Mult"
                     }
                 },

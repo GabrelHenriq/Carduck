@@ -735,7 +735,7 @@ SMODS.Joker{
         if context.individual and context.cardarea == G.play then
             if context.other_card.config.center == G.P_CENTERS.m_steel then
                 return {
-                x_mult = card.ability.steel_xmult,
+                x_mult = card.ability.extra.steel_xmult,
                 card = card
                 }
             end
