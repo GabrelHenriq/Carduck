@@ -154,7 +154,7 @@ calculate = function(self, card, context)
                 
 
                 return {
-                    play_sound('sj_p5critical', 1, 0.5)
+                    play_sound('sj_p5critical', 1, 0.5),
                     message = localize('k_upgrade_ex'),
                     colour = G.C.MULT,
                     card = card
@@ -684,7 +684,7 @@ SMODS.Joker{
                 context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) +
                     card.ability.extra.chips
                 return {
-                    play_sound('sj_barkdog', 1, 0.5)
+                    play_sound('sj_barkdog', 1, 0.5),
                     message = localize('k_upgrade_ex'),
                     colour = G.C.CHIPS
             }
