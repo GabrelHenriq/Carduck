@@ -87,8 +87,8 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = "sample_multieffect",
-    path = "j_sample_multieffect.png",
+    key = "minejoker",
+    path = "j_minejoker.png",
     px = 71,
     py = 95
 })
@@ -544,7 +544,6 @@ SMODS.Joker{
 
             if #context.full_hand == #context.scoring_hand then
                 return {
-                    message = localize{type='variable', key='a_xmult', vars={card.ability.extra.x_mult}},
                     x_mult = card.ability.extra.x_mult,
                     colour = G.C.MULT,
                     card = card
@@ -559,34 +558,58 @@ SMODS.Joker{
 }
 
 SMODS.Joker{
-    key = "sample_multieffect",
-    config = { extra = { chips = 10, mult = 10, x_mult = 2 } },
+    key = "minejoker",
+    config = { extra = { x_mult = 1, gain = 0.25 } }, 
     pos = { x = 0, y = 0 },
     rarity = 2,
-    cost = 4,
+    cost = 6,
     blueprint_compat = true,
-    eternal_compat = false,
+    eternal_compat = true,
     unlocked = true,
     discovered = true,
-    effect = nil,
-    atlas = 'sample_multieffect',
-    soul_pos = nil,
+    atlas = 'minejoker',
 
-    calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:get_id() == 10 then
+calculate = function(self, card, context)
+        if context.joker_main and card.ability.extra.x_mult > 1 then
             return {
-                chips = card.ability.extra.chips,
-                mult = card.ability.extra.mult,
+                message = localize{type='variable', key='a_xmult', vars={card.ability.extra.x_mult}},
                 x_mult = card.ability.extra.x_mult,
-                card = self
+                colour = G.C.MULT
             }
+        end
+
+        if context.after and not context.blueprint then
+            local stones_to_destroy = {}
+            
+            for i = 1, #context.scoring_hand do
+                if context.scoring_hand[i].config.center == G.P_CENTERS.m_stone then
+                    stones_to_destroy[#stones_to_destroy+1] = context.scoring_hand[i]
+                end
+            end
+
+            if #stones_to_destroy > 0 then
+                for j = 1, #stones_to_destroy do
+                    local target = stones_to_destroy[j]
+                    
+                    target:start_dissolve()
+                    
+                    card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.gain
+                end
+
+                return {
+                    message = localize('k_upgrade_ex'),
+                    colour = G.C.MULT,
+                    card = card
+                }
+            end
         end
     end,
 
     loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.chips, card.ability.extra.mult }, key = self.key }
+        return { vars = { card.ability.extra.gain, card.ability.extra.x_mult } }
     end
 }
+
 SMODS.Joker{
     key = "encantado",
     config = { extra = { mult_gain = 1, mult = 0 } },

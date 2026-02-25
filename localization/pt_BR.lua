@@ -20,7 +20,7 @@ return {
                 },
             },
             j_sj_arcanajoker = {
-                name = "Coringa Arcano",
+                name = "Curinga Arcano",
                 text = {
                     {
                         "Sempre que usar uma carta de {C:tarot}Tarô{},",
@@ -102,6 +102,16 @@ return {
                     {
                         "{X:mult,C:white}X#1#{} Mult se todas as cartas",
                         "na mão jogada {C:attention}pontuaram{}"
+                    }
+                },
+            },
+            j_sj_minejoker = {
+                name = "Curinga Minerador",
+                text = {
+                    {
+                        "{C:red}Destrói{} cartas de {C:attention}pedra{} jogadas,",
+                        "Ganha {X:mult,C:white}X#1#{} Mult para cada carta destruída",
+                        "{C:inactive}(Atualmente {X:mult,C:white}X#2#{} Mult)",
                     }
                 },
             },

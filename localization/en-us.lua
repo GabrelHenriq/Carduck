@@ -87,18 +87,18 @@ return {
                     }
                 },
             },
-            j_sj_sample_multieffect = {
-                name = "Sample Multi-Effect",
+            j_sj_minejoker = {
+                name = "Miner Joker",
                 text = {
                     {
-                        "Each played {C:attention}10{}",
-                        "gives {C:chips}+#1#{} Chips and",
-                        "{C:mult}+#2#{} Mult when scored",
+                        "{C:red}Destroys{} played {C:attention}Stone{} cards,",
+                        "Gains {X:mult,C:white}X#1#{} Mult for each destroyed",
+                        "{C:inactive}(Currently {X:mult,C:white}X#2#{} Mult)",
                     }
                 },
             },
             j_sj_encantado = {
-                name = "Enhanced",
+                name = "Enchanted",
                 text = {
                     {
                         "This Joker gains",
