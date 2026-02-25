@@ -115,6 +115,16 @@ return {
                     }
                 },
             },
+            b_meta_deck = {
+                name = "Deck do Metaverso",
+                text = {
+                    {
+                        "Começa com {C:red}Cartão de Aviso{} e",
+                        "{C:blue}Sombra do Jimbo{},",
+                        "{C:attention}Começa sem cartas de Realeza{}"
+                    }
+                },
+            },
         }
     }
 }
