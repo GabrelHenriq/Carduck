@@ -120,7 +120,7 @@ return {
                 text = {
                     {
                         "Se a mão jogada contém um {C:attention}Full House{},",
-                        "as cartas jogadas ganham {C:blue}+#2#{} Fichas permanentes"
+                        "as cartas jogadas ganham {C:blue}+15{} Fichas permanentes"
                     }
                 },
             },

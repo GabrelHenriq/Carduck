@@ -121,7 +121,7 @@ return {
                 text = {
                     {
                         "If played hand contains a {C:attention}Full House{},",
-                        "Played cards earn {C:blue}+#2#{} Chips permanently"
+                        "Played cards earn {C:blue}+15{} Chips permanently"
                     }
                 },
             },
