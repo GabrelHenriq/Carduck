@@ -78,12 +78,12 @@ return {
                     }
                 },
             },
-            j_sj_sample_rarebaseballcard = {
-                name = "Sample Rare Baseball Card",
+            j_sj_papyrus = {
+                name = "COOL DUDE!!11!!",
                 text = {
                     {
-                        "{X:mult,C:white}Rare{} Jokers",
-                        "each give {X:mult,C:white} X#1# {} Mult",
+                        "{X:mult,C:white}X#1#{} Mult if all cards",
+                        "in played hand {C:attention}scored{}"
                     }
                 },
             },

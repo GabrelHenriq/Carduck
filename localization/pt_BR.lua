@@ -96,6 +96,15 @@ return {
                     }
                 },
             },
+            j_sj_papyrus = {
+                name = "CARA DESCOLADO!!11!!",
+                text = {
+                    {
+                        "{X:mult,C:white}X#1#{} Mult se todas as cartas",
+                        "na mão jogada {C:attention}pontuaram{}"
+                    }
+                },
+            },
         }
     }
 }
