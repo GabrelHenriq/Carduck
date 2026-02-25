@@ -771,13 +771,14 @@ SMODS.Joker{
             if context.scoring_hand then
                 for i = 1, #context.scoring_hand do
                     local sc = context.scoring_hand[i]
-                    if sc and sc.config and not sc.removed then
+                    if sc and not sc.removed and sc.children then
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
                             delay = 0.1,
                             func = function()
-                                if sc and sc.config and not sc.removed then
-                                    sc:set_seal('red', nil, true)
+                                if sc and not sc.removed and sc.children then
+                                    sc:set_seal('red', nil, nil) 
+                                    sc:juice_up() 
                                 end
                                 return true
                             end
