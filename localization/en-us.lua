@@ -96,7 +96,26 @@ return {
                         "{C:mult}+#2#{} Mult when scored",
                     }
                 },
-            }
+            },
+            j_sj_encantado = {
+                name = "Enhanced",
+                text = {
+                    {
+                        "This Joker gains",
+                        "{C:mult}+#1#{} Mult per", 
+                        "{C:attention}enhanced{} card played",
+                        "{C:inactive}(Currently {C:red}+#2#{C:inactive} Mult)",
+                    }
+                },
+            },
+            j_sj_alok = {
+                name = "Alok, The Cat",
+                text = {
+                    {
+                        "{C:attention}SUMMON ASTAROTH{}",
+                    }
+                },
+            },
         }
     },
     misc = {

@@ -570,3 +570,50 @@ SMODS.Joker{
         return { vars = { card.ability.extra.chips, card.ability.extra.mult }, key = self.key }
     end
 }
+SMODS.Joker{
+    key = "encantado",
+    config = { extra = { mult_gain = 1, mult = 0 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.mult_gain, card.ability.extra.mult } } 
+    end,
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 5,
+    blueprint_compat = true,
+    eternal_compat = true,
+    perishable_compat = false,
+    unlocked = true,
+    discovered = true,
+    atlas = 'encantado',
+    calculate = function(self, card, context)
+        if context.before and not context.blueprint then
+            local enhanced = {}
+            for _, scored_card in ipairs(context.scoring_hand) do
+                if next(SMODS.get_enhancements(scored_card)) and not scored_card.debuff then
+                    enhanced[#enhanced + 1] = scored_card
+                end
+            end
+            if #enhanced > 0 then 
+                card.ability.extra.mult = card.ability.extra.mult + card.ability.extra.mult_gain * #enhanced
+                return {
+                    message = localize { type = 'variable', key = 'a_mult', vars = { card.ability.extra.mult } },
+                    colour = G.C.MULT
+                    }
+                end
+            end
+        if context.joker_main then 
+            return {
+                mult = card.ability.extra.mult
+            }
+        end
+    end
+}
+
+SMODS.Joker{
+    key = "alok",
+    rarity = 4,
+    cost = 10,
+    unlocked = true,
+    discovered = true,
+    atlas = 'alok',
+}

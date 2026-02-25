@@ -78,6 +78,24 @@ return {
                     }
                 },
             },
+            j_sj_encantado = {
+                name = "Encantado",
+                text = {
+                    {
+                        "Adiciona {C:mult}+#1#{} Mult pra cada",
+                        "carta {C:attention}aprimorada{} jogada",
+                        "{C:inactive}(Atualmente {C:red}+#2#{C:inactive} Mult)",
+                    }
+                },
+            },
+            j_sj_alok = {
+                name = "Alok, O Gato",
+                text = {
+                    {
+                        "{C:attention}INVOCAR ASTAROTH{}",
+                    }
+                },
+            },
         }
     }
 }
