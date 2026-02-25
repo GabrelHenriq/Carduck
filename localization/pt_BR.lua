@@ -118,11 +118,11 @@ return {
         },
         Back = {
             b_sj_metadeck = {
-                name = "Metaverse Deck",
+                name = "Baralho do Metaverso",
                 text = {
-                        "Start with {C:red}Calling Card{} and",
-                        "{C:blue}Jimbo's Shadow{},",
-                        "{C:attention}No face cards on start{}"
+                        "Começe com {C:red}Cartão de Aviso{} e",
+                        "{C:blue}Sombra do Jimbo{},",
+                        "{C:attention}Sem cartas de realeza ao iniciar{}"
                     },
             },
         },
