@@ -683,9 +683,11 @@ SMODS.Joker{
         if context.individual and context.cardarea == G.play then
             if context.poker_hands and next(context.poker_hands["Full House"]) then
                 
+                local random_pitch = 0.8 + math.random() * 0.4
+
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        play_sound('sj_barkdog', 1, 0.5)
+                        play_sound('sj_barkdog', random_pitch, 0.6)
                         return true
                     end
                 }))
