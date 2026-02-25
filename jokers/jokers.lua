@@ -767,58 +767,50 @@ SMODS.Joker{
     atlas = 'repetition',
 
     calculate = function(self, card, context)
-        -- Rodar após a mão ser pontuada
         if context.after and not context.blueprint then
-
-            -- 1. Aplicação de Selo (Substituição Direta na Memória)
+            -- 1. Aplicação de Selo (Voltando ao método seguro mas funcional)
             if context.scoring_hand then
                 for i = 1, #context.scoring_hand do
                     local sc = context.scoring_hand[i]
                     if sc and not sc.removed then
-                        -- Em vez de sc:set_seal, alteramos a variável diretamente
-                        sc.ability.seal = 'Red' 
-                        
-                        -- Adicionamos apenas o efeito visual de brilho (seguro)
-                        G.E_MANAGER:add_event(Event({
-                            trigger = 'after',
-                            delay = 0.1,
-                            func = function()
-                                sc:juice_up()
-                                return true
-                            end
-                        }))
+                        -- O segredo é NÃO usar o terceiro argumento (immediate) como true
+                        sc:set_seal('Red', nil, true) 
                     end
                 end
             end
 
-            -- 2. Destruição de cartas na mão (Sinergia com Calling Card)
+            -- 2. Destruição de cartas e Sinergia com Calling Card
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.5,
                 func = function()
-                    local destroyed_count = 0
+                    local destroyed_cards = {}
+                    local count = 0
                     if G.hand and G.hand.cards then
                         for i = #G.hand.cards, 1, -1 do
                             local c = G.hand.cards[i]
-                            -- Se for uma figura, o Calling Card vai detectar a destruição aqui
-                            if destroyed_count < card.ability.extra.cards_to_destroy and c and not c.removed then
+                            if count < card.ability.extra.cards_to_destroy and c and not c.removed then
+                                table.insert(destroyed_cards, c)
                                 c:start_dissolve()
-                                destroyed_count = destroyed_count + 1
+                                count = count + 1
                             end
                         end
+                    end
+                    
+                    -- FORÇAR o Calling Card a ver a destruição
+                    if #destroyed_cards > 0 then
+                        SMODS.calculate_context({remove_playing_cards = true, removed = destroyed_cards})
                     end
                     return true
                 end
             }))
 
-            -- 3. Auto-destruição do Repetition
+            -- 3. Auto-destruição
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.7,
                 func = function()
-                    if card and not card.removed then
-                        card:start_dissolve()
-                    end
+                    card:start_dissolve()
                     return true
                 end
             }))
