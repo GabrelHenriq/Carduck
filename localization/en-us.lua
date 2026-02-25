@@ -139,7 +139,7 @@ return {
                 text = {
                     {
                         "Scoring cards in played hand gain {C:red}Red Seal{},",
-                        "{C:red}destroys{} #1# cards in hand, then {C:red}destroys{} itself"
+                        "{C:red}destroys{} {C:attention}3{} cards in hand, then {C:red}destroys{} itself"
                     }
                 },
             },

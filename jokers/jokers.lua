@@ -768,16 +768,15 @@ SMODS.Joker{
 
     calculate = function(self, card, context)
         if context.after and not context.blueprint then
-
             if context.scoring_hand then
                 for i = 1, #context.scoring_hand do
                     local sc = context.scoring_hand[i]
-                    if sc and sc.set_seal and not sc.removed then
+                    if sc and sc.config and not sc.removed then
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
                             delay = 0.1,
                             func = function()
-                                if sc and not sc.removed then 
+                                if sc and sc.config and not sc.removed then
                                     sc:set_seal('red', nil, true)
                                 end
                                 return true
@@ -816,9 +815,5 @@ SMODS.Joker{
                 end
             }))
         end
-    end,
-
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.cards_to_destroy } }
     end
 }

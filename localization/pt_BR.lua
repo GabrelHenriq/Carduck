@@ -138,7 +138,7 @@ return {
                 text = {
                     {
                         "Cartas que pontuarem na mão jogada ganham {C:red}Selo Vermelho{},",
-                        "{C:red}destrói{} #1# cartas na mão, depois se {C:red}destrói{}"
+                        "{C:red}destrói{} {C:attention}3{} cartas na mão, depois se {C:red}destrói{}"
                     }
                 },
             },
