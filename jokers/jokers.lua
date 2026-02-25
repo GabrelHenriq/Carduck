@@ -768,18 +768,15 @@ SMODS.Joker{
 
     calculate = function(self, card, context)
         if context.after and not context.blueprint then
-            -- 1. Aplicação de Selo (Voltando ao método seguro mas funcional)
             if context.scoring_hand then
                 for i = 1, #context.scoring_hand do
                     local sc = context.scoring_hand[i]
                     if sc and not sc.removed then
-                        -- O segredo é NÃO usar o terceiro argumento (immediate) como true
                         sc:set_seal('Red', nil, true) 
                     end
                 end
             end
 
-            -- 2. Destruição de cartas e Sinergia com Calling Card
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.5,
@@ -797,7 +794,6 @@ SMODS.Joker{
                         end
                     end
                     
-                    -- FORÇAR o Calling Card a ver a destruição
                     if #destroyed_cards > 0 then
                         SMODS.calculate_context({remove_playing_cards = true, removed = destroyed_cards})
                     end
@@ -805,7 +801,6 @@ SMODS.Joker{
                 end
             }))
 
-            -- 3. Auto-destruição
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
                 delay = 0.7,
