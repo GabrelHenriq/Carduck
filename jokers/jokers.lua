@@ -771,14 +771,14 @@ SMODS.Joker{
             if context.scoring_hand then
                 for i = 1, #context.scoring_hand do
                     local sc = context.scoring_hand[i]
-                    if sc and not sc.removed and sc.children then
+                    if sc and not sc.removed then
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
                             delay = 0.1,
                             func = function()
-                                if sc and not sc.removed and sc.children then
-                                    sc:set_seal('red', nil, nil) 
-                                    sc:juice_up() 
+                                if sc and sc.ability then 
+                                    sc:set_seal('red', true, true)
+                                    sc:juice_up()
                                 end
                                 return true
                             end
@@ -789,7 +789,7 @@ SMODS.Joker{
 
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.3,
+                delay = 0.5,
                 func = function()
                     local destroyed_count = 0
                     if G.hand and G.hand.cards then
@@ -807,7 +807,7 @@ SMODS.Joker{
 
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.6,
+                delay = 0.7,
                 func = function()
                     if card and not card.removed then
                         card:start_dissolve()
