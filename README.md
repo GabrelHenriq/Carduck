@@ -30,5 +30,5 @@ Instale agora no seu ***B a l a t r o***, pelo **ULTRAJANTE** preço de **NADA!!
 <p float="left">
   <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_callingcard.png?raw=true" width="100" />
   <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_lazybones.png?raw=true" width="100" /> 
-  <img src="[/img3.png](https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_arcanajoker.png?raw=true)" width="100" />
+  <img src="https://github.com/GabrelHenriq/Carduck/blob/main/assets/2x/j_arcanajoker.png?raw=true" width="100" />
 </p>
