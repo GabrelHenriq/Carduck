@@ -134,6 +134,15 @@ return {
                     }
                 },
             },
+            j_sj_repetition = {
+                name = "Repetition",
+                text = {
+                    {
+                        "Scoring cards in played hand gain {C:red}Red Seal{},",
+                        "{C:red}destroys{} #1# cards in hand, then {C:red}destroys{} itself"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

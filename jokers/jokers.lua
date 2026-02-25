@@ -121,6 +121,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "repetition",
+    path = "j_repetition.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -744,5 +751,62 @@ SMODS.Joker{
 
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.steel_xmult } }
+    end
+}
+
+SMODS.Joker{
+    key = "repetition",
+    config = { extra = { cards_to_destroy = 3 } }, 
+    pos = { x = 0, y = 0 },
+    rarity = 3,
+    cost = 9,
+    blueprint_compat = false,
+    eternal_compat = false,
+    unlocked = true,
+    discovered = true,
+    atlas = 'repetition',
+
+    calculate = function(self, card, context)
+        if context.after and not context.blueprint then
+
+            for i = 1, #context.scoring_hand do
+                local scoring_card = context.scoring_hand[i]
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    func = function()
+                        scoring_card:set_seal('red', nil, true)
+                        return true
+                    end
+                }))
+            end
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.4, 
+                func = function()
+                    local destroyed_count = 0
+                    for i = #G.hand.cards, 1, -1 do
+                        if destroyed_count < card.ability.extra.cards_to_destroy then
+                            G.hand.cards[i]:start_dissolve()
+                            destroyed_count = destroyed_count + 1
+                        end
+                    end
+                    return true
+                end
+            }))
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.5,
+                func = function()
+                    card:start_dissolve()
+                    return true
+                end
+            }))
+        end
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.cards_to_destroy } }
     end
 }

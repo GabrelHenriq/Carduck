@@ -133,6 +133,15 @@ return {
                     }
                 },
             },
+            j_sj_repetition = {
+                name = "Repetição",
+                text = {
+                    {
+                        "Cartas que pontuarem na mão jogada ganham {C:red}Selo Vermelho{},",
+                        "{C:red}destrói{} #1# cartas na mão, depois se {C:red}destrói{}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {
