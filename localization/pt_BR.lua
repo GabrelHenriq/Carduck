@@ -124,6 +124,15 @@ return {
                     }
                 },
             },
+            j_sj_engineer = {
+                name = "Engenheiro",
+                text = {
+                    {
+                        "{C:attention}Cartas de Ferro{} Jogadas",
+                        "Dão {X:mult,C:white}X#1#{} Mult"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

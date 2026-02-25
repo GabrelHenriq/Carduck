@@ -125,6 +125,15 @@ return {
                     }
                 },
             },
+            j_sj_engineer = {
+                name = "Engineer",
+                text = {
+                    {
+                        "Played {C:attention}Steel Cards{}",
+                        "give {X:mult,C:white}X#1#{} Mult"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

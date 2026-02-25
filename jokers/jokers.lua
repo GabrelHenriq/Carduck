@@ -114,6 +114,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "engineer",
+    path = "j_engineer.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -710,4 +717,32 @@ SMODS.Joker{
     unlocked = true,
     discovered = true,
     atlas = 'alok',
+}
+
+SMODS.Joker{
+    key = "engineer",
+    config = { extra = { steel_xmult = 1.5 } }, 
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 5,
+    blueprint_compat = true,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = true,
+    atlas = 'engineer',
+
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
+            if context.other_card.config.center == G.P_CENTERS.m_steel then
+                return {
+                x_mult = card.ability.steel_xmult,
+                card = card
+                }
+            end
+        end
+    end,
+
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.steel_xmult } }
+    end
 }
