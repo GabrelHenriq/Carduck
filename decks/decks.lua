@@ -7,12 +7,12 @@ SMODS.Atlas({
 
 SMODS.Back{
     key = "metadeck",
-    pos = { x = 0, y = 0},
+    pos = { x = 0, y = 0 },
     atlas = "metadeck",
     unlocked = true,
     discovered = true,
     config = {
-        joker1 = "j_sj_callingcard"
+        joker1 = "j_sj_callingcard",
         joker2 = "j_sj_shadowjimbo"
     },
 
