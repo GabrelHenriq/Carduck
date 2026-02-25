@@ -683,8 +683,13 @@ SMODS.Joker{
         if context.individual and context.cardarea == G.play then
             if context.poker_hands and next(context.poker_hands["Full House"]) then
                 
-                play_sound('sj_barkdog', 1, 0.5)
-
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        play_sound('sj_barkdog', 1, 0.5)
+                        return true
+                    end
+                }))
+                
                 context.other_card.ability.perma_bonus = (context.other_card.ability.perma_bonus or 0) + card.ability.extra.chips
                 
                 return {
