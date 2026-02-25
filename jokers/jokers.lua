@@ -766,17 +766,20 @@ SMODS.Joker{
     discovered = true,
     atlas = 'repetition',
 
-calculate = function(self, card, context)
+    calculate = function(self, card, context)
         if context.after and not context.blueprint then
 
             if context.scoring_hand then
                 for i = 1, #context.scoring_hand do
-                    local scoring_card = context.scoring_hand[i]
-                    if scoring_card and not scoring_card.removed then
+                    local sc = context.scoring_hand[i]
+                    if sc and sc.set_seal and not sc.removed then
                         G.E_MANAGER:add_event(Event({
                             trigger = 'after',
+                            delay = 0.1,
                             func = function()
-                                scoring_card:set_seal('red', nil, true)
+                                if sc and not sc.removed then 
+                                    sc:set_seal('red', nil, true)
+                                end
                                 return true
                             end
                         }))
@@ -786,7 +789,7 @@ calculate = function(self, card, context)
 
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.4,
+                delay = 0.3,
                 func = function()
                     local destroyed_count = 0
                     if G.hand and G.hand.cards then
@@ -804,7 +807,7 @@ calculate = function(self, card, context)
 
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.5,
+                delay = 0.6,
                 func = function()
                     if card and not card.removed then
                         card:start_dissolve()
