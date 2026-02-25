@@ -569,7 +569,7 @@ SMODS.Joker{
     discovered = true,
     atlas = 'minejoker',
 
-calculate = function(self, card, context)
+    calculate = function(self, card, context)
         if context.joker_main and card.ability.extra.x_mult > 1 then
             return {
                 message = localize{type='variable', key='a_xmult', vars={card.ability.extra.x_mult}},
@@ -579,23 +579,27 @@ calculate = function(self, card, context)
         end
 
         if context.after and not context.blueprint then
-            local stones_to_destroy = {}
+            local stones_found = false
             
             for i = 1, #context.scoring_hand do
-                if context.scoring_hand[i].config.center == G.P_CENTERS.m_stone then
-                    stones_to_destroy[#stones_to_destroy+1] = context.scoring_hand[i]
-                end
-            end
-
-            if #stones_to_destroy > 0 then
-                for j = 1, #stones_to_destroy do
-                    local target = stones_to_destroy[j]
+                local target = context.scoring_hand[i]
+                if target.config.center == G.P_CENTERS.m_stone and not target.removed then
+                    stones_found = true
                     
-                    target:start_dissolve()
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.2,
+                        func = function() 
+                            target:start_dissolve()
+                            return true
+                        end
+                    }))
                     
                     card.ability.extra.x_mult = card.ability.extra.x_mult + card.ability.extra.gain
                 end
+            end
 
+            if stones_found then
                 return {
                     message = localize('k_upgrade_ex'),
                     colour = G.C.MULT,
