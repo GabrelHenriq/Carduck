@@ -766,29 +766,36 @@ SMODS.Joker{
     discovered = true,
     atlas = 'repetition',
 
-    calculate = function(self, card, context)
+calculate = function(self, card, context)
         if context.after and not context.blueprint then
 
-            for i = 1, #context.scoring_hand do
-                local scoring_card = context.scoring_hand[i]
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    func = function()
-                        scoring_card:set_seal('red', nil, true)
-                        return true
+            if context.scoring_hand then
+                for i = 1, #context.scoring_hand do
+                    local scoring_card = context.scoring_hand[i]
+                    if scoring_card and not scoring_card.removed then
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'after',
+                            func = function()
+                                scoring_card:set_seal('red', nil, true)
+                                return true
+                            end
+                        }))
                     end
-                }))
+                end
             end
 
             G.E_MANAGER:add_event(Event({
                 trigger = 'after',
-                delay = 0.4, 
+                delay = 0.4,
                 func = function()
                     local destroyed_count = 0
-                    for i = #G.hand.cards, 1, -1 do
-                        if destroyed_count < card.ability.extra.cards_to_destroy then
-                            G.hand.cards[i]:start_dissolve()
-                            destroyed_count = destroyed_count + 1
+                    if G.hand and G.hand.cards then
+                        for i = #G.hand.cards, 1, -1 do
+                            local c = G.hand.cards[i]
+                            if destroyed_count < card.ability.extra.cards_to_destroy and c and not c.removed then
+                                c:start_dissolve()
+                                destroyed_count = destroyed_count + 1
+                            end
                         end
                     end
                     return true
@@ -799,7 +806,9 @@ SMODS.Joker{
                 trigger = 'after',
                 delay = 0.5,
                 func = function()
-                    card:start_dissolve()
+                    if card and not card.removed then
+                        card:start_dissolve()
+                    end
                     return true
                 end
             }))
