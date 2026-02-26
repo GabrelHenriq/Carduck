@@ -172,5 +172,10 @@ return {
                     },
             },
         },
+        misc = {
+            challenge_names = {
+                c_sj_diy = "Do It Yourself"
+            }
+        }
     }
 }

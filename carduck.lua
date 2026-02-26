@@ -2,6 +2,7 @@ SampleJimbos = {}
 
 assert(SMODS.load_file("globals.lua"))()
 assert(SMODS.load_file("decks/decks.lua"))()
+assert(SMODS.load_file("challenges/challenges.lua"))()
 
 -- Jokers
 local joker_src = NFS.getDirectoryItems(SMODS.current_mod.path .. "jokers")
