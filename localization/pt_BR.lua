@@ -180,5 +180,11 @@ return {
                     },
             },
         },
+        misc = {
+            challenge_names = {
+                c_sj_fade_out = "Desvanecer",
+                c_sj_legendary_printer = "Impressora Lendária",
+            },
+        }
     }
 }

@@ -183,8 +183,10 @@ return {
         },
         misc = {
             challenge_names = {
-                c_sj_diy = "Do It Yourself"
-            }
+                c_sj_fade_out = "Fade out",
+                c_sj_legendary_printer = "Legendary Printer",
+            },
         }
+        
     }
 }

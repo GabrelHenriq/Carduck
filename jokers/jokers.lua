@@ -95,7 +95,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "encantado",
-    path = "j_sample_multieffect.png",
+    path = "j_enchanted.png",
     px = 71,
     py = 95
 })
@@ -151,7 +151,14 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "dealer",
-    path = "j_SSS.png",
+    path = "j_dealer.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "zeroreverse",
+    path = "j_zeroreverse.png",
     px = 71,
     py = 95
 })
@@ -988,5 +995,71 @@ SMODS.Joker {
         G.hand:change_size(-card.ability.extra.h_size)
         G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
         ease_discard(-card.ability.extra.d_size)
+    end,
+}
+
+SMODS.Joker {
+    key = "zeroreverse",
+    atlas = "zeroreverse"
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = false,
+    eternal_compat = false,
+    rarity = 3,
+    cost = 7,
+    pos = { x = 0, y = 0 },
+    calculate = function(self, card, context)
+        if context.end_of_round and context.game_over and not context.blueprint then
+            if G.GAME.chips / G.GAME.blind.chips >= 0.50 then 
+
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        G.hand_text_area.blind_chips:juice_up()
+                        G.hand_text_area.game_chips:juice_up()
+                        play_sound('tarot1')
+                        card:start_dissolve()
+                        return true
+                    end
+                }))
+
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.5,
+                    func = function()
+                        for i = #G.jokers.cards, 1, -1 do
+                            local j = G.jokers.cards[i]
+                            if not j.ability.eternal then
+                                j:start_dissolve()
+                            end
+                        end
+                        return true
+                    end
+                }))
+
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.8,
+                    func = function()
+                        local cards_to_create = 5
+                        for i = 1, cards_to_create do
+                            if #G.jokers.cards + G.GAME.joker_buffer < G.jokers.config.card_limit then
+                                G.GAME.joker_buffer = G.GAME.joker_buffer + 1
+                                local new_card = create_card('Joker', G.jokers, nil, nil, nil, nil, nil, 'zeroreverse')
+                                new_card:add_to_deck()
+                                G.jokers:emplace(new_card)
+                                G.GAME.joker_buffer = G.GAME.joker_buffer - 1
+                            end
+                        end
+                        return true
+                    end
+                }))
+
+                return {
+                    message = localize('k_saved_ex'),
+                    saved = true,
+                    colour = G.C.RED
+                }
+            end
+        end
     end,
 }
