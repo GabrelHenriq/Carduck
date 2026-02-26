@@ -160,6 +160,15 @@ return {
                     }
                 },
             },
+            j_sj_dealer = {
+                name = "Crupiê",
+                text = {
+                    {
+                        "{C:blue}+1{} mão, {C:red}+1{} discarte e",
+                        "{C:attention}+1{} tamanho de mão"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

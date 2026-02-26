@@ -142,6 +142,20 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "soft_reset",
+    path = "j_SSS.png",
+    px = 71,
+    py = 95
+})
+
+SMODS.Atlas({
+    key = "dealer",
+    path = "j_SSS.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -917,4 +931,62 @@ SMODS.Joker{
         end
     end
 end
+}
+
+SMODS.Joker {
+    key = "soft_reset",
+    blueprint_compat = false,
+    rarity = 1,
+    cost = 5,
+    pos = { x = 0, y = 0 },
+    unlocked = true,
+    discovered = true,
+    atlas = "soft_reset",
+    calculate = function(self, card, context)
+        if context.first_hand_drawn and not context.blueprint then
+            local eval = function() return G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
+            juice_card_until(card, eval, true)
+        end
+        if context.scoring_hand and G.GAME.current_round.hands_played == 0 then
+            return{
+                remove = true,
+                delay = 0,45
+            },
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.7,
+                func = function()
+                    card:start_dissolve()
+                    return true
+                end
+            }))
+        end
+    end
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+SMODS.Joker {
+    key = "dealer",
+    atlas = "dealer",
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = false,
+    unlocked = true,
+    discovered = true,
+    pos = { x = 0, y = 0 },
+    config = { extra  = { h_size = 1, d_size = 1, h_plays = 1 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.h_size, card.ability.extra.d_size, card.ability.extra.h_plays } }
+    end,
+    add_to_deck = function(self, card, from_debuff)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands + card.ability.extra.h_plays
+        G.hand:change_size(card.ability.extra.h_size)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards + card.ability.extra.d_size
+        ease_discard(card.ability.extra.d_size)
+    end,
+    remove_from_deck = function(self, card, from_debuff)
+        G.GAME.round_resets.hands = G.GAME.round_resets.hands - card.ability.extra.h_plays
+        G.hand:change_size(-card.ability.extra.h_size)
+        G.GAME.round_resets.discards = G.GAME.round_resets.discards - card.ability.extra.d_size
+        ease_discard(-card.ability.extra.d_size)
+    end,
 }

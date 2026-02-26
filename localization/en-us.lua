@@ -161,6 +161,15 @@ return {
                     }
                 },
             },
+            j_sj_dealer = {
+                name = "Dealer",
+                text = {
+                    {
+                        "{C:blue}+1{} hand, {C:red}+1{} discard and",
+                        "{C:attention}+1{} hand size"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {
