@@ -933,8 +933,8 @@ SMODS.Joker{
                 }))
 
             return {
-                message = "SSS!"
-                card = card
+                message = "SSS!",
+                card = card,
                 colour = G.C.MONEY
             }
         end
