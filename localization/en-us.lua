@@ -70,7 +70,7 @@ return {
                 },
             },
             j_sj_lazy_bones = {
-                name = "lazy Bones",
+                name = "Lazy Bones",
                 text = {
                     {
                         "{C:red}+5{} Mult for every card not scoring in",
@@ -83,7 +83,7 @@ return {
                 text = {
                     {
                         "{X:mult,C:white}X#1#{} Mult if all cards",
-                        "in played hand {C:attention}scored{}"
+                        "in played hand {C:attention}score{}"
                     }
                 },
             },
@@ -117,7 +117,7 @@ return {
                 },
             },
             j_sj_loyal_joker = {
-                name = "loyal Joker",
+                name = "Loyal Joker",
                 text = {
                     {
                         "If played hand contains a {C:attention}Full House{},",
@@ -149,7 +149,7 @@ return {
                 name = "Metaverse Deck",
                 text = {
                         "Start with {C:red}Calling Card{} and",
-                        "{C:blue}Jimbo's Shadow{},",
+                        "{C:blue}Jimbo's Shadow{}.",
                         "{C:attention}No face cards on start{}"
                     },
             },

@@ -116,7 +116,7 @@ return {
                 },
             },
             j_sj_loyal_joker = {
-                name = "Curinga leal",
+                name = "Curinga Leal",
                 text = {
                     {
                         "Se a mão jogada contém um {C:attention}Full House{},",
@@ -129,7 +129,7 @@ return {
                 text = {
                     {
                         "{C:attention}Cartas de Aço{} Jogadas",
-                        "Dão {X:mult,C:white}X#1#{} Mult"
+                        "dão {X:mult,C:white}X#1#{} Mult"
                     }
                 },
             },
@@ -148,7 +148,7 @@ return {
                 name = "Baralho do Metaverso",
                 text = {
                         "Começe com {C:red}Cartão de Aviso{} e",
-                        "{C:blue}Sombra do Jimbo{},",
+                        "{C:blue}Sombra do Jimbo{}.",
                         "{C:attention}Sem cartas de realeza ao iniciar{}"
                     },
             },
