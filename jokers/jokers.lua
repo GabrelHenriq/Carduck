@@ -832,41 +832,42 @@ SMODS.Joker{
     discovered = true,
     atlas = 'homunculus',
 
-    calculate = function(self, card, context)
-        if context.remove_playing_cards then
-            local cards_to_recreate = context.removed
-            
-            for i = 1, #cards_to_recreate do
-                local c = cards_to_recreate[i]
-                
-                local suit = c.base.suit
-                local rank = c.base.value
-                local edition = c.edition
-                local seal = c.seal
-                local ability = c.ability 
-
-                G.E_MANAGER:add_event(Event({
-                    trigger = 'after',
-                    delay = 0.15, 
-                    func = function()
-                        local new_card = create_playing_card({
-                            front = G.P_CARDS[suit..'_'..rank], 
-                            center = c.config.center 
-                        }, G.hand, nil, nil, {G.C.SECONDARY_SET.Tarot})
-                        
-                        if edition then new_card:set_edition(edition, true) end
-                        if seal then new_card:set_seal(seal, true) end
-                        
-                        new_card:juice_up()
-                        
-                        return true
-                    end
-                }))
-            end
-            
-            return {
-                card = card
-            }
+calculate = function(self, card, context)
+    if context.remove_playing_cards and not context.blueprint then
+        local removed_cards = {}
+        for _, v in ipairs(context.removed) do 
+            table.insert(removed_cards, v) 
         end
+        
+        for i = 1, #removed_cards do
+            local c = removed_cards[i]
+            local suit = c.base.suit
+            local rank = c.base.value
+            local edition = c.edition
+            local seal = c.seal
+            local center = c.config.center 
+
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.2,
+                func = function()
+                    local new_card = create_playing_card({
+                        front = G.P_CARDS[suit..'_'..rank], 
+                        center = center 
+                    }, G.hand, nil, nil, {G.C.SECONDARY_SET.Tarot})
+                    
+                    if edition then new_card:set_edition(edition, true) end
+                    if seal then new_card:set_seal(seal, true) end
+                    
+                    new_card:juice_up()
+                    return true
+                end
+            }))
+        end
+        
+        return {
+            card = card
+        }
     end
+end
 }
