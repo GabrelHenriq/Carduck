@@ -151,6 +151,15 @@ return {
                     }
                 },
             },
+            j_sj_SSS = {
+                name = "Ranque SSS",
+                text = {
+                    {
+                        "Se a mão contém uma {C:attention}Sequência{},",
+                        "{C:red}se destrói{} e concede uma {C:dark_edition}Marca Negativa{}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

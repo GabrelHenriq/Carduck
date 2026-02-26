@@ -135,6 +135,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "SSS",
+    path = "j_SSS.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -870,4 +877,41 @@ calculate = function(self, card, context)
         }
     end
 end
+}
+
+SMODS.Joker{
+    key = "SSS",
+    config = { }, 
+    pos = { x = 0, y = 0 }, 
+    rarity = 3,
+    cost = 8,
+    blueprint_compat = true,
+    atlas = 'SSS',
+
+    calculate = function(self, card, context)
+        if context.before and not context.blueprint then
+            if next(context.poker_hands["Straight"]) then
+            
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        add_tag(Tag('tag_negative'))
+                        play_sound('generic1', 0.9, 0.8)
+                    return true
+                end
+                }))
+
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.3,
+                    func = function()
+                        card:start_dissolve()
+                        return true
+                    end
+                }))
+
+            return {
+                card = card
+            }
+        end
+    end
 }

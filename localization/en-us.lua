@@ -152,6 +152,15 @@ return {
                     }
                 },
             },
+            j_sj_SSS = {
+                name = "Rank SSS",
+                text = {
+                    {
+                        "If hand contains a {C:attention}Straight{},",
+                        "{C:red}destroy itself{} and give a {C:dark_edition}Negative Tag{}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {
