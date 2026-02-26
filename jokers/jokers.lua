@@ -328,7 +328,7 @@ calculate = function(self, card, context)
                         }))
 
                         return {
-                            message = localize("k_arcana_active"),
+                            message = localize("k_sj_arcana_active"),
                             colour = G.C.PURPLE,
                             card = card
                         }
@@ -1057,7 +1057,7 @@ SMODS.Joker {
                 }))
 
                 return {
-                    message = localize('k_zero_reversed'),
+                    message = localize('k_sj_zero_reversed'),
                     saved = true,
                     colour = G.C.PURPLE
                 }

@@ -197,8 +197,8 @@ return {
                 c_sj_legendary_printer = "Legendary Printer",
             },
             dictionary = {
-                k_zero_reversed = "ZERO_REVERSED: NOT_ENOUGH_ENERGY",
-                k_arcana_active = "The Arcana reveals itself...",
+                k_sj_zero_reversed = "ZERO_REVERSED: NOT_ENOUGH_ENERGY",
+                k_sj_arcana_active = "The Arcana reveals itself...",
 
             }
         }

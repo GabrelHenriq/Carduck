@@ -196,8 +196,8 @@ return {
                 c_sj_legendary_printer = "Impressora Lendária",
             },
             dictionary = {
-                k_zero_reversed = "ZERO_REVERSO: SEM_ENERGIA_SUFICIENTE",
-                k_arcana_active = "O Arcano se revela...",
+                k_sj_zero_reversed = "ZERO_REVERSO: SEM_ENERGIA_SUFICIENTE",
+                k_sj_arcana_active = "O Arcano se revela...",
             }
         }
     }
