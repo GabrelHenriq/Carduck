@@ -163,6 +163,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "player_sticker",
+    path = "j_player_sticker.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -1064,4 +1071,39 @@ SMODS.Joker {
             end
         end
     end,
+}
+
+SMODS.Joker {
+    key = "player_sticker",
+    atlas = "player_sticker",
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    rarity = 2,
+    cost = 7,
+    config = { extra = { chips = 50 }}
+    pos = { x = 0, y = 0 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.chips } }
+    end,
+    calculate = function(self, card, context)
+        if context.other_joker then
+            if context.other_joker.config.center.rarity == 2 then
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        context.other_joker:juice_up(0.5, 0.5)
+                        return true
+                    end
+                }))
+
+                return {
+                    message = "+#1#",
+                    chip_mod = card.ability.extra.chips,
+                    colour = G.C.CHIPS,
+                    card = card
+                }
+            end
+        end
+    end
 }

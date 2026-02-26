@@ -179,6 +179,15 @@ return {
                     }
                 },
             },
+            j_sj_player_sticker = {
+                name = "Figurinha de Jogador",
+                text = {
+                    {
+                        "Curingas {C:green}Incomuns{}",
+                        "dão {C:blue}+#1#{} Fichas",
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

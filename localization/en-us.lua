@@ -180,6 +180,15 @@ return {
                     }
                 },
             },
+            j_sj_player_sticker = {
+                name = "Striker Sticker",
+                text = {
+                    {
+                        "{C:green}Uncommon{} jokers",
+                        "give {C:blue}+#1#{} Chips",
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {
