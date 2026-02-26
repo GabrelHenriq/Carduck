@@ -328,7 +328,7 @@ calculate = function(self, card, context)
                         }))
 
                         return {
-                            message = "The Arcana!",
+                            message = localize("k_arcana_active"),
                             colour = G.C.PURPLE,
                             card = card
                         }
@@ -933,7 +933,9 @@ SMODS.Joker{
                 }))
 
             return {
+                message = "SSS!"
                 card = card
+                colour = G.C.MONEY
             }
         end
     end
@@ -1010,7 +1012,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over and not context.blueprint then
-            if G.GAME.chips / G.GAME.blind.chips <= 0.50 then 
+            if G.GAME.chips / G.GAME.blind.chips >= 0.50 then 
 
                 G.E_MANAGER:add_event(Event({
                     func = function()
@@ -1055,9 +1057,9 @@ SMODS.Joker {
                 }))
 
                 return {
-                    message = localize('k_saved_ex'),
+                    message = localize('k_zero_reversed'),
                     saved = true,
-                    colour = G.C.RED
+                    colour = G.C.PURPLE
                 }
             end
         end

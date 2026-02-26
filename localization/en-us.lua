@@ -174,7 +174,7 @@ return {
                 name = "Zero Reverse",
                 text = {
                     {
-                        "Prevents Death if chips scored are {C:attention}50% or less{}",
+                        "Prevents Death if chips scored are {C:attention}atleast 50%{}",
                         "of required chips,",
                         "{C:red}destroys itself and other jokers{}, Add {C:attention}5{} random jokers"
                     }
@@ -196,6 +196,11 @@ return {
                 c_sj_fade_out = "Fade out",
                 c_sj_legendary_printer = "Legendary Printer",
             },
+            dictionary = {
+                k_zero_reversed = "ZERO_REVERSED: NOT_ENOUGH_ENERGY",
+                k_arcana_active = "The Arcana reveals itself...",
+
+            }
         }
         
     }

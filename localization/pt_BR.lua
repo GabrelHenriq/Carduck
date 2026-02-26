@@ -173,7 +173,7 @@ return {
                 name = "Zero Reverso",
                 text = {
                     {
-                        "Previne derrota se as fichas pontuadas forem {C:attention}50% ou menos{}",
+                        "Previne derrota se as fichas pontuadas forem {C:attention}pelo menos 50%{}",
                         "das fichas necessárias",
                         "{C:red}Destrói a si mesmo e outros Curingas{}, Cria {C:attention}5{} curingas aleatórios"
                     }
@@ -195,6 +195,10 @@ return {
                 c_sj_fade_out = "Desvanecer",
                 c_sj_legendary_printer = "Impressora Lendária",
             },
+            dictionary = {
+                k_zero_reversed = "ZERO_REVERSO: SEM_ENERGIA_SUFICIENTE",
+                k_arcana_active = "O Arcano se revela...",
+            }
         }
     }
 }
