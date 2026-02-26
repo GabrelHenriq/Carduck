@@ -1082,7 +1082,7 @@ SMODS.Joker {
     eternal_compat = true,
     rarity = 2,
     cost = 7,
-    config = { extra = { chips = 50 }}
+    config = { extra = { chips = 50 }},
     pos = { x = 0, y = 0 },
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.chips } }
