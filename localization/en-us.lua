@@ -170,6 +170,16 @@ return {
                     }
                 },
             },
+            j_sj_zeroreverse = {
+                name = "Zero Reverse",
+                text = {
+                    {
+                        "Prevents Death if chips scored are {C:attention}50% or less{}",
+                        "of required chips,",
+                        "{C:red}destroys itself and other jokers{}, Add {C:attention}5{} random jokers"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

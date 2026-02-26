@@ -1010,7 +1010,7 @@ SMODS.Joker {
     pos = { x = 0, y = 0 },
     calculate = function(self, card, context)
         if context.end_of_round and context.game_over and not context.blueprint then
-            if G.GAME.chips / G.GAME.blind.chips >= 0.50 then 
+            if G.GAME.chips / G.GAME.blind.chips <= 0.50 then 
 
                 G.E_MANAGER:add_event(Event({
                     func = function()

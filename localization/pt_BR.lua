@@ -169,6 +169,16 @@ return {
                     }
                 },
             },
+            j_sj_zeroreverse = {
+                name = "Zero Reverso",
+                text = {
+                    {
+                        "Previne derrota se as fichas pontuadas forem {C:attention}50% ou menos{}",
+                        "das fichas necessárias",
+                        "{C:red}Destrói a si mesmo e outros Curingas{}, Cria {C:attention}5{} curingas aleatórios"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {
