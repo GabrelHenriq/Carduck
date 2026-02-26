@@ -142,6 +142,15 @@ return {
                     }
                 },
             },
+            j_sj_homunculus = {
+                name = "O Homúnculo",
+                text = {
+                    {
+                        "{C:attention}Recria{} cartas Destruídas",
+                        "{C:red}Ainda ativa efeitos de destruição{}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

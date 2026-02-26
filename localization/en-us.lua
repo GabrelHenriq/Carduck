@@ -143,6 +143,15 @@ return {
                     }
                 },
             },
+            j_sj_homunculus = {
+                name = "The Homunculus",
+                text = {
+                    {
+                        "{C:attention}Recreates{} destroyed Cards",
+                        "{C:red}Still triggers destruction effects{}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

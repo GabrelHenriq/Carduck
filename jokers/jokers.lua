@@ -128,6 +128,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "homunculus",
+    path = "j_homunculus.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -809,6 +816,58 @@ SMODS.Joker{
                     return true
                 end
             }))
+        end
+    end
+}
+
+SMODS.Joker{
+    key = "homunculus",
+    config = { }, 
+    pos = { x = 0, y = 0 }, 
+    rarity = 2,
+    cost = 7,
+    blueprint_compat = false,
+    eternal_compat = true,
+    unlocked = true,
+    discovered = true,
+    atlas = 'homunculus',
+
+    calculate = function(self, card, context)
+        if context.remove_playing_cards then
+            local cards_to_recreate = context.removed
+            
+            for i = 1, #cards_to_recreate do
+                local c = cards_to_recreate[i]
+                
+                local suit = c.base.suit
+                local rank = c.base.value
+                local edition = c.edition
+                local seal = c.seal
+                local ability = c.ability 
+
+                G.E_MANAGER:add_event(Event({
+                    trigger = 'after',
+                    delay = 0.15, 
+                    func = function()
+                        local new_card = create_playing_card({
+                            front = G.P_CARDS[suit..'_'..rank], 
+                            center = c.config.center 
+                        }, G.hand, nil, nil, {G.C.SECONDARY_SET.Tarot})
+                        
+                        if edition then new_card:set_edition(edition, true) end
+                        if seal then new_card:set_seal(seal, true) end
+                        
+                        new_card:juice_up()
+                        play_sound('poker_reveal', 1.2, 0.4)
+                        
+                        return true
+                    end
+                }))
+            end
+            
+            return {
+                card = card
+            }
         end
     end
 }
