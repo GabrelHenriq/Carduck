@@ -1098,9 +1098,9 @@ SMODS.Joker {
                 }))
 
                 return {
-                    message = "+#1#",
+                    message = "+50",
                     chip_mod = card.ability.extra.chips,
-                    colour = G.C.CHIPS,
+                    colour = G.C.BLUE,
                     card = card
                 }
             end
