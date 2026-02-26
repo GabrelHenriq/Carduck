@@ -858,7 +858,6 @@ SMODS.Joker{
                         if seal then new_card:set_seal(seal, true) end
                         
                         new_card:juice_up()
-                        play_sound('poker_reveal', 1.2, 0.4)
                         
                         return true
                     end
