@@ -1000,7 +1000,7 @@ SMODS.Joker {
 
 SMODS.Joker {
     key = "zeroreverse",
-    atlas = "zeroreverse"
+    atlas = "zeroreverse",
     unlocked = true,
     discovered = true,
     blueprint_compat = false,
