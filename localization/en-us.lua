@@ -157,7 +157,7 @@ return {
                 text = {
                     {
                         "If hand contains a {C:attention}Straight{},",
-                        "{C:red}destroy itself{} and give a {C:dark_edition}Negative Tag{}"
+                        "{C:red}destroys itself{} and gives a {C:dark_edition}Negative Tag{}"
                     }
                 },
             },
