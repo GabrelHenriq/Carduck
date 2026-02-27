@@ -144,7 +144,7 @@ SMODS.Atlas({
 
 SMODS.Atlas({
     key = "soft_reset",
-    path = "j_SSS.png",
+    path = "j_soft_reset.png",
     px = 71,
     py = 95
 })
