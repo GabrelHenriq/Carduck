@@ -164,7 +164,7 @@ return {
                 name = "Crupiê",
                 text = {
                     {
-                        "{C:blue}+1{} mão, {C:red}+1{} discarte e",
+                        "{C:blue}+1{} mão, {C:red}+1{} descarte e",
                         "{C:attention}+1{} tamanho de mão"
                     }
                 },
@@ -194,6 +194,17 @@ return {
                     {
                         "Ganha {C:blue}+#1#{} Fichas quando um curinga",
                         "é {C:red}destruído{}",
+                        "{C:inactive}(Atualmente {C:blue}+#2#{} {C:inactive}Fichas){}"
+                    }
+                },
+            },
+            j_sj_nevermind = {
+                name = "Tantofaz",
+                text = {
+                    {
+                        "{C:attention}Primeiro descarte{} da rodada {C:red}destrói{} cartas descartadas",
+                        "ganha {C:blue}+#1#{} fichas quando uma carta",
+                        "é {C:red}destruída{}",
                         "{C:inactive}(Atualmente {C:blue}+#2#{} {C:inactive}Fichas){}"
                     }
                 },

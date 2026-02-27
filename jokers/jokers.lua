@@ -216,6 +216,7 @@ calculate = function(self, card, context)
         Xmult_mod = card.ability.extra.x_mult
         }
     end
+end,
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.gain, card.ability.extra.x_mult } }
     end
@@ -1129,18 +1130,12 @@ SMODS.Joker {
                     return true
                 end
             }))
-            return {
-                message = localize("k_upgrade_ex"),
-                colour = G.C.RED
-            }
         end
-
-
 
         if context.joker_main and card.ability.extra.chips > 0 then
             return {
                 chip_mod = card.ability.extra.chips,
-                message = "+" .. card.ability.extra.chips .. " Chips",
+                message = "+" .. card.ability.extra.chips,
                 colour = G.C.CHIPS
             }
         end

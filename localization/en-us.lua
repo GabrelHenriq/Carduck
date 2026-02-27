@@ -199,6 +199,17 @@ return {
                     }
                 },
             },
+            j_sj_nevermind = {
+                name = "Nevermind",
+                text = {
+                    {
+                        "{C:attention}First Discard{} of round {C:red}destroys{} discarded cards",
+                        "gains {C:blue}+#1#{} Chips when a card",
+                        "is {C:red}destroyed{}",
+                        "{C:inactive}(Currently {C:blue}+#2#{} {C:inactive}Chips){}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {
