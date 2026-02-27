@@ -1200,8 +1200,8 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
             end
 
             -- Reaper ---
-            if self.config.center.set == 'Joker' and item_type ~= true then
-                if v.config.center.key == 'j_cd_reaper' and v ~= self then
+            if self.config.center.set == 'Joker' and not self.getting_sliced and not self.selling and item_type ~= true then
+                if v.config.center.key == 'j_cd_reaper' and v ~= self and not self.selling and not G.CONTROLLER.dragging then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
 
                     local card_to_upgrade = v
