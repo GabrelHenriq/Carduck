@@ -1152,34 +1152,48 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
             if (self.config.center.set == 'Default' or self.config.center.set == 'Enhanced') then
                 if v.config.center.key == 'j_sj_nevermind' then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
-                    v:juice_up()
 
-                    attention_text({
-                        text = "+" .. v.ability.extra.gain,
-                        colour = G.C.CHIPS,
-                        scale = 0.6, 
-                        hold = 0.8,
-                        major = v
-                    })
-                    play_sound("chips1", 1, 1.2)
+                    local card_to_upgrade = v
+
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card_to_upgrade:juice_up()
+
+                            attention_text({
+                                text = localize("k_upgrade_ex"),
+                                colour = G.C.CHIPS,
+                                scale = 0.6, 
+                                hold = 0.8,
+                                major = card_to_upgrade
+                            })
+                        play_sound("chips1", 1, 1.2)
+                        return true
+                    }))
                 end
             end
 
             -- --- Calling Card ---
             if (self.config.center.set == 'Default' or self.config.center.set == 'Enhanced') and self:is_face() then
                 if v.config.center.key == 'j_sj_callingcard' then
-                    -- Ajuste 'x_mult' e 'gain' de acordo com o seu config.extra
                     v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.gain
-                    v:juice_up()
 
-                    attention_text({
-                        text = localize("k_upgrade_ex"),
-                        colour = G.C.CHIPS,
-                        scale = 0.6, 
-                        hold = 0.8,
-                        major = v
-                    })
-                    play_sound("sj_p5critical", 0.8, 1)
+                    local card_to_upgrade = v
+
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card_to_upgrade:juice_up()
+
+                            attention_text({
+                                text = localize("k_upgrade_ex"),
+                                colour = G.C.MULT,
+                                scale = 0.6, 
+                                hold = 0.8,
+                                major = card_to_upgrade
+                            })
+                            play_sound("sj_p5critical", 1, 1)
+                            return true
+                    }))
+                    
                 end
             end
 
@@ -1187,16 +1201,23 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
             if self.config.center.set == 'Joker' then
                 if v.config.center.key == 'j_sj_reaper' and v ~= self then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
-                    v:juice_up()
 
-                    attention_text({
-                        text = "+" .. v.ability.extra.gain,
-                        colour = G.C.CHIPS,
-                        scale = 0.6, 
-                        hold = 0.8,
-                        major = v
-                    })
-                    play_sound("chips1", 1, 1.2)
+                    local card_to_upgrade = v
+
+                    G.E_MANAGER:add_event(Event({
+                        func = function()
+                            card_to_upgrade:juice_up()
+
+                            attention_text({
+                                text = localize("k_upgrade_ex"),
+                                colour = G.C.CHIPS,
+                                scale = 0.6, 
+                                hold = 0.8,
+                                major = card_to_upgrade
+                            })
+                            play_sound("chips1", 1, 1.2)
+                            return true
+                    }))
                 end
             end
 
