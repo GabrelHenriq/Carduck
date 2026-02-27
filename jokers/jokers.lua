@@ -1202,11 +1202,16 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
                 end
             end
 
-            -- --- Reaper
+            -- --- Reaper ---
             if self.config.center.set == 'Joker' then
                 if v.config.center.key == 'j_cd_reaper' and v ~= self then
-                    if not (G.context and G.context.selling_card) and not self.selling and item_type ~= true then
-                        
+        
+                    -- A CONDIÇÃO DEFINITIVA:
+                    -- No Balatro, se você está vendendo, o jogo entra em estado de processamento de clique.
+                    -- Além disso, checamos se a área da carta ainda é o inventário de Jokers.
+                    local is_being_sold = self.selling or (G.CONTROLLER.hovering.target == self and G.CONTROLLER.left_confirm_pressed) or item_type == true
+                    
+                    if not is_being_sold then
                         v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
                         local card_to_upgrade = v
                         G.E_MANAGER:add_event(Event({
@@ -1226,8 +1231,6 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
                     end
                 end
             end
-        end
-    end
 
     card_dissolve_ref(self, dissolve_colours, shelf_live, item_type)
 end
