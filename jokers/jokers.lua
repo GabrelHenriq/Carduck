@@ -1207,6 +1207,28 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
             end
 
             
+        -- --- Reaper (Destruição de Jokers) ---
+        if self.config.center.set == 'Joker' and v.config.center.key == 'j_cd_reaper' and v ~= self then
+            -- A prova real: se for venda manual, item_type é true ou a carta está sendo arrastada.
+            local is_sale = (item_type == true) or self.selling or G.CONTROLLER.dragging.target == self
+                
+            if not is_sale then
+                v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
+                local card_to_upgrade = v
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        card_to_upgrade:juice_up()
+                        attention_text({
+                            text = localize("k_upgrade_ex"),
+                            colour = G.C.CHIPS,
+                            scale = 0.6, hold = 0.8, major = card_to_upgrade
+                        })
+                        play_sound("chips1", 1, 1.2)
+                        return true
+                        end
+                    }))
+                end
+            end
         end
     end
 
