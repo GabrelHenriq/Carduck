@@ -1161,7 +1161,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
                             attention_text({
                                 text = localize("k_upgrade_ex"),
-                                colour = G.C.CHIPS,
+                                colour = G.C.SJ_RED,
                                 scale = 0.6, 
                                 hold = 0.8,
                                 major = card_to_upgrade
@@ -1186,7 +1186,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
                             attention_text({
                                 text = localize("k_upgrade_ex"),
-                                colour = G.C.MULT,
+                                colour = G.C.SJ_WHITE,
                                 scale = 0.6, 
                                 hold = 0.8,
                                 major = card_to_upgrade
