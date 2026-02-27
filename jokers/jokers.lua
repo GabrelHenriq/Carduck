@@ -177,6 +177,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "nevermind",
+    path = "j_nevermind.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -203,57 +210,12 @@ SMODS.Joker{
     atlas = 'callingcard',                                --atlas name, single sprites are deprecated.
 
 calculate = function(self, card, context)
-        if context.remove_playing_cards and not context.blueprint then
-            local face_cards_destroyed = 0
-            for k, val in ipairs(context.removed) do
-                if val:is_face() then 
-                    face_cards_destroyed = face_cards_destroyed + 1
-                end
-            end
-
-            if face_cards_destroyed > 0 then
-                card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_destroyed)
-                
-                
-
-                return {
-                    play_sound('sj_p5critical', 1, 0.5),
-                    message = localize('k_upgrade_ex'),
-                    colour = G.C.MULT,
-                    card = card
-                }
-            end
-        end
-
-        if context.cards_destroyed and not context.blueprint then
-            local face_cards_shattered = 0
-            for k, val in ipairs(context.glass_shattered) do
-                if val:is_face() then
-                    face_cards_shattered = face_cards_shattered + 1
-                end
-            end
-
-            if face_cards_shattered > 0 then
-                card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_shattered)
-                
-                play_sound('sj_p5critical', 1, 0.5)
-
-                return {
-                    message = localize('k_upgrade_ex'),
-                    colour = G.C.MULT,
-                    card = card
-                }
-            end
-        end
-
-        if context.joker_main and card.ability.extra.x_mult > 1 then
-            return {
-                x_mult = card.ability.extra.x_mult,
-                colour = G.C.MULT
-            }
-        end
-    end,
-
+    if context.joker_main then
+        return {
+        message = 'X' .. card.ability.extra.x_mult,
+        Xmult_mod = card.ability.extra.x_mult
+        }
+    end
     loc_vars = function(self, info_queue, card)
         return { vars = { card.ability.extra.gain, card.ability.extra.x_mult } }
     end
@@ -1136,19 +1098,116 @@ SMODS.Joker {
         end
     end
 }
--- codigo p agir com o de cima (NÃO MEXER MT)
+
+
+SMODS.Joker {
+    key = "nevermind",
+    atlas = "nevermind",
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    rarity = 2,
+    cost = 7,
+    config = { extra = { chips = 0, gain = 20 }},
+    pos = { x = 0, y = 0 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.gain, card.ability.extra.chips } }
+    end,
+    calculate = function(self, card, context)
+
+        if context.pre_discard and G.GAME.current_round.discards_used == 0 and not context.blueprint then
+            G.E_MANAGER:add_event(Event({
+                trigger = 'after',
+                delay = 0.2,
+                func = function()
+                    for i = 1, #context.full_hand do
+                        local c = context.full_hand[i]
+                        c:start_dissolve() 
+                    end
+                    play_sound('slice1', 0.9, 0.8) 
+                    return true
+                end
+            }))
+            return {
+                message = localize("k_upgrade_ex"),
+                colour = G.C.RED
+            }
+        end
+
+
+
+        if context.joker_main and card.ability.extra.chips > 0 then
+            return {
+                chip_mod = card.ability.extra.chips,
+                message = "+" .. card.ability.extra.chips .. " Chips",
+                colour = G.C.CHIPS
+            }
+        end
+    end
+}
+
+-- (COLOCAR OUTROS CORINGAS ACIMA DESSE BLOCO) codigo p agir com outros coringas q destroem cartas (NÃO MEXER MT)
 local card_dissolve_ref = Card.start_dissolve
 function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
-    if self.config.center.set == 'Joker' then
-        if G.jokers and G.jokers.cards then
-            for _, v in ipairs(G.jokers.cards) do
+    if G.jokers and G.jokers.cards then
+        for _, v in ipairs(G.jokers.cards) do
+
+            -- --- Nevermind ---
+            if (self.config.center.set == 'Default' or self.config.center.set == 'Enhanced') then
+                if v.config.center.key == 'j_sj_nevermind' then
+                    v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
+                    v:juice_up()
+
+                    attention_text({
+                        text = "+" .. v.ability.extra.gain,
+                        colour = G.C.CHIPS,
+                        scale = 0.6, 
+                        hold = 0.8,
+                        major = v
+                    })
+                    play_sound("chips1", 1, 1.2)
+                end
+            end
+
+            -- --- Calling Card ---
+            if (self.config.center.set == 'Default' or self.config.center.set == 'Enhanced') and self:is_face() then
+                if v.config.center.key == 'j_sj_callingcard' then
+                    -- Ajuste 'x_mult' e 'gain' de acordo com o seu config.extra
+                    v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.gain
+                    v:juice_up()
+
+                    attention_text({
+                        text = localize("k_upgrade_ex"),
+                        colour = G.C.CHIPS,
+                        scale = 0.6, 
+                        hold = 0.8,
+                        major = v
+                    })
+                    play_sound("sj_p5critical", 0.8, 1)
+                end
+            end
+
+            -- Reaper ---
+            if self.config.center.set == 'Joker' then
                 if v.config.center.key == 'j_sj_reaper' and v ~= self then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
                     v:juice_up()
+
+                    attention_text({
+                        text = "+" .. v.ability.extra.gain,
+                        colour = G.C.CHIPS,
+                        scale = 0.6, 
+                        hold = 0.8,
+                        major = v
+                    })
+                    play_sound("chips1", 1, 1.2)
                 end
             end
+
         end
     end
+
     card_dissolve_ref(self, dissolve_colours, shelf_live, item_type)
 end
--- Cabou o codigo acima, pode continuar
+-- Cabou o codigo acima.
