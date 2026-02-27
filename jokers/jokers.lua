@@ -171,13 +171,6 @@ SMODS.Atlas({
 })
 
 SMODS.Atlas({
-    key = "reaper",
-    path = "j_reaper.png",
-    px = 71,
-    py = 95
-})
-
-SMODS.Atlas({
     key = "nevermind",
     path = "j_nevermind.png",
     px = 71,
@@ -1078,35 +1071,6 @@ SMODS.Joker {
     end
 }
 
-SMODS.Joker {
-    key = "reaper",
-    atlas = "reaper",
-    unlocked = true,
-    discovered = true,
-    blueprint_compat = true,
-    eternal_compat = true,
-    rarity = 2,
-    cost = 7,
-    config = { extra = { chips = 0, gain = 40 }},
-    pos = { x = 0, y = 0 },
-    loc_vars = function(self, info_queue, card)
-        return { vars = { card.ability.extra.gain, card.ability.extra.chips } }
-    end,
-    calculate = function(self, card, context)
-        -- O SMODS envia context.destroying_card quando algo morre (Adaga, Nevermind, etc)
-        -- Mas NÃO envia quando você vende!
-        if context.destroying_card and not context.blueprint then
-            if context.destroying_card.config.center.set == 'Joker' and context.destroying_card ~= card then
-                card.ability.extra.chips = card.ability.extra.chips + card.ability.extra.gain
-                return {
-                    extra = {focus = card, message = localize('k_upgrade_ex')},
-                    colour = G.C.CHIPS
-                }
-            end
-        end
-    end
-}
-
 
 SMODS.Joker {
     key = "nevermind",
@@ -1203,30 +1167,6 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
                         end
                     }))
                     
-                end
-            end
-
-            
-        -- --- Reaper (Destruição de Jokers) ---
-        if self.config.center.set == 'Joker' and v.config.center.key == 'j_cd_reaper' and v ~= self then
-            -- A prova real: se for venda manual, item_type é true ou a carta está sendo arrastada.
-            local is_sale = (item_type == true) or self.selling or G.CONTROLLER.dragging.target == self
-                
-            if not is_sale then
-                v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
-                local card_to_upgrade = v
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        card_to_upgrade:juice_up()
-                        attention_text({
-                            text = localize("k_upgrade_ex"),
-                            colour = G.C.CHIPS,
-                            scale = 0.6, hold = 0.8, major = card_to_upgrade
-                        })
-                        play_sound("chips1", 1, 1.2)
-                        return true
-                        end
-                    }))
                 end
             end
         end
