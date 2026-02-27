@@ -195,7 +195,7 @@ return {
                     {
                         "Gains {C:blue}+#1#{} Chips when a joker",
                         "is {C:red}destroyed{}",
-                        "{C:inactive}(Currently {C:blue}+#2#{} Chips){}"
+                        "{C:inactive}(Currently {C:blue}+#2#{} {C:inactive}Chips){}"
                     }
                 },
             },

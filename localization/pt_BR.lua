@@ -194,7 +194,7 @@ return {
                     {
                         "Ganha {C:blue}+#1#{} Fichas quando um curinga",
                         "é {C:red}destruído{}",
-                        "{C:inactive}(Atualmente {C:blue}+#2#{} Fichas){}"
+                        "{C:inactive}(Atualmente {C:blue}+#2#{} {C:inactive}Fichas){}"
                     }
                 },
             },
