@@ -195,7 +195,6 @@ SMODS.Joker{
     atlas = 'callingcard',                                --atlas name, single sprites are deprecated.
 
 calculate = function(self, card, context)
-        -- destroy
         if context.remove_playing_cards and not context.blueprint then
             local face_cards_destroyed = 0
             for k, val in ipairs(context.removed) do
@@ -218,7 +217,6 @@ calculate = function(self, card, context)
             end
         end
 
-        -- glass
         if context.cards_destroyed and not context.blueprint then
             local face_cards_shattered = 0
             for k, val in ipairs(context.glass_shattered) do
@@ -230,7 +228,6 @@ calculate = function(self, card, context)
             if face_cards_shattered > 0 then
                 card.ability.extra.x_mult = card.ability.extra.x_mult + (card.ability.extra.gain * face_cards_shattered)
                 
-                -- sound
                 play_sound('sj_p5critical', 1, 0.5)
 
                 return {
@@ -241,7 +238,6 @@ calculate = function(self, card, context)
             end
         end
 
-        -- mult
         if context.joker_main and card.ability.extra.x_mult > 1 then
             return {
                 x_mult = card.ability.extra.x_mult,
