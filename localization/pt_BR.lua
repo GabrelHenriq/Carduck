@@ -209,6 +209,15 @@ return {
                     }
                 },
             },
+            j_cd_soft_reset = {
+                name = "Soft Reset",
+                text = {
+                    {
+                        "{C:red}Destrói cartas pontuadoras{} da {C:blue}mão{}",
+                        "{C:red}se destrói{} e cria uma {C:attention}Marca Padrão{}",
+                    }
+                },
+            },
         },
         Back = {
             b_cd_metadeck = {

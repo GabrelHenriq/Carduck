@@ -930,22 +930,25 @@ SMODS.Joker {
             local eval = function() return G.GAME.current_round.hands_played == 0 and not G.RESET_JIGGLES end
             juice_card_until(card, eval, true)
         end
-        if context.scoring_hand and G.GAME.current_round.hands_played == 0 then
-            return{
-                remove = true,
-                delay = 0,45
-            },
+        if context.destroy_card and context.cardarea == G.play and G.GAME.current_round.hands_played == 0 then
+            return {
+                remove = true
+            }
+        end  
+        if context.remove_playing_cards then 
             G.E_MANAGER:add_event(Event({
-                trigger = 'after',
-                delay = 0.7,
                 func = function()
+                    add_tag(Tag('tag_standard'))
+                    play_sound('generic1', 0.9 + math.random() * 0.1, 0.8)
+                    play_sound('holo1', 1.2 + math.random() * 0.1, 0.4)
+                    play_sound('tarot1')
                     card:start_dissolve()
                     return true
                 end
             }))
-        end
+        end   
     end
-}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
 
 SMODS.Joker {
     key = "dealer",

@@ -210,6 +210,15 @@ return {
                     }
                 },
             },
+            j_cd_soft_reset = {
+                name = "Soft Reset",
+                text = {
+                    {
+                        "{C:red}Destroy scoring cards{} of {C:blue}hand{}",
+                        "{C:red}destroys itself{} and creates a {C:attention}Standard Tag{}",
+                    }
+                },
+            },
         },
         Back = {
             b_cd_metadeck = {
