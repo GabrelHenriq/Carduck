@@ -1200,7 +1200,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
             end
 
             -- Reaper ---
-            if self.config.center.set == 'Joker' then
+            if self.config.center.set == 'Joker' and not self.selling then
                 if v.config.center.key == 'j_cd_reaper' and v ~= self then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
 
