@@ -1204,7 +1204,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
             if self.config.center.set == 'Joker' and v.config.center.key == 'j_cd_reaper' and v ~= self then
                 
-                local is_sale = (item_type == true) or self.selling or (G.CONTROLLER.hovering.target == self and G.SETTINGS.paused == false)
+                local is_sale = (item_type == true) or self.selling or (G.CONTROLLER.hovering.target == self and G.SETTINGS.paused == false) or context.selling_card
                 
                 if not is_sale then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
