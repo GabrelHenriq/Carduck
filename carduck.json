@@ -4,7 +4,7 @@
   "display_name": "Carduck",
   "author": ["Cartola & DangerDuck"],
   "description": "Carduck mod, a base to start modding Balatro!",
-  "prefix": "sj",
+  "prefix": "cd",
   "prefixcomment":"ABOVE PREFIX IS ADDED TO E.G. LOCALIZATION!",
   "main_file": "carduck.lua",
   "priority": 0,

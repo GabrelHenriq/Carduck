@@ -1,7 +1,7 @@
 return {
     descriptions = {
         Joker = {
-            j_sj_callingcard = {
+            j_cd_callingcard = {
                 name = "Cartão de Aviso",
                 text = {
                     "Este curinga ganha {X:mult,C:white}X#1#{} Mult",
@@ -10,7 +10,7 @@ return {
                     "{C:inactive}(Atualmente {X:mult,C:white} X#2# {C:inactive} Mult)"
                 },
             },
-            j_sj_shadowjimbo = {
+            j_cd_shadowjimbo = {
                 name = "Sombra do Jimbo",
                 text = {
                     {
@@ -19,7 +19,7 @@ return {
                     }
                 },
             },
-            j_sj_arcanajoker = {
+            j_cd_arcanajoker = {
                 name = "Curinga Arcano",
                 text = {
                     {
@@ -30,7 +30,7 @@ return {
                     }
                 },
             },
-            j_sj_jackpot = {
+            j_cd_jackpot = {
                 name = "Jackpot",
                 text = {
                     {
@@ -39,7 +39,7 @@ return {
                     }
                 },
             },
-            j_sj_device_friend = {
+            j_cd_device_friend = {
                 name = "DEVICE_FRIEND",
                 text = {
                     {
@@ -49,7 +49,7 @@ return {
                     }
                 },
             },
-            j_sj_tree = {
+            j_cd_tree = {
                 name = "Árvore",
                 text = {
                     {
@@ -59,7 +59,7 @@ return {
                     }
                 },
             },
-            j_sj_flushed = {
+            j_cd_flushed = {
                 name = "Corado",
                 text = {
                     {
@@ -69,7 +69,7 @@ return {
                     }
                 },
             },
-            j_sj_lazy_bones = {
+            j_cd_lazy_bones = {
                 name = "Preguiçosso",
                 text = {
                     {
@@ -78,7 +78,7 @@ return {
                     }
                 },
             },
-            j_sj_encantado = {
+            j_cd_encantado = {
                 name = "Encantado",
                 text = {
                     {
@@ -88,7 +88,7 @@ return {
                     }
                 },
             },
-            j_sj_alok = {
+            j_cd_alok = {
                 name = "Alok, O Gato",
                 text = {
                     {
@@ -96,7 +96,7 @@ return {
                     }
                 },
             },
-            j_sj_papyrus = {
+            j_cd_papyrus = {
                 name = "CARA DESCOLADO!!11!!",
                 text = {
                     {
@@ -105,7 +105,7 @@ return {
                     }
                 },
             },
-            j_sj_minejoker = {
+            j_cd_minejoker = {
                 name = "Curinga Minerador",
                 text = {
                     {
@@ -115,7 +115,7 @@ return {
                     }
                 },
             },
-            j_sj_loyal_joker = {
+            j_cd_loyal_joker = {
                 name = "Curinga Leal",
                 text = {
                     {
@@ -124,7 +124,7 @@ return {
                     }
                 },
             },
-            j_sj_engineer = {
+            j_cd_engineer = {
                 name = "Engenheiro",
                 text = {
                     {
@@ -133,7 +133,7 @@ return {
                     }
                 },
             },
-            j_sj_repetition = {
+            j_cd_repetition = {
                 name = "Repetição",
                 text = {
                     {
@@ -142,7 +142,7 @@ return {
                     }
                 },
             },
-            j_sj_homunculus = {
+            j_cd_homunculus = {
                 name = "O Homúnculo",
                 text = {
                     {
@@ -151,7 +151,7 @@ return {
                     }
                 },
             },
-            j_sj_SSS = {
+            j_cd_SSS = {
                 name = "Ranque SSS",
                 text = {
                     {
@@ -160,7 +160,7 @@ return {
                     }
                 },
             },
-            j_sj_dealer = {
+            j_cd_dealer = {
                 name = "Crupiê",
                 text = {
                     {
@@ -169,7 +169,7 @@ return {
                     }
                 },
             },
-            j_sj_zeroreverse = {
+            j_cd_zeroreverse = {
                 name = "Zero Reverso",
                 text = {
                     {
@@ -179,7 +179,7 @@ return {
                     }
                 },
             },
-            j_sj_player_sticker = {
+            j_cd_player_sticker = {
                 name = "Figurinha de Jogador",
                 text = {
                     {
@@ -188,7 +188,7 @@ return {
                     }
                 },
             },
-            j_sj_reaper = {
+            j_cd_reaper = {
                 name = "Ceifador",
                 text = {
                     {
@@ -198,7 +198,7 @@ return {
                     }
                 },
             },
-            j_sj_nevermind = {
+            j_cd_nevermind = {
                 name = "Tantofaz",
                 text = {
                     {
@@ -211,7 +211,7 @@ return {
             },
         },
         Back = {
-            b_sj_metadeck = {
+            b_cd_metadeck = {
                 name = "Baralho do Metaverso",
                 text = {
                         "Começe com {C:red}Cartão de Aviso{} e",
@@ -223,12 +223,12 @@ return {
     },
     misc = {
             challenge_names = {
-                c_sj_fade_out = "Desvanecer",
-                c_sj_legendary_printer = "Impressora Lendária",
+                c_cd_fade_out = "Desvanecer",
+                c_cd_legendary_printer = "Impressora Lendária",
             },
             dictionary = {
-                k_sj_zero_reversed = "ZERO_REVERSO: SEM_ENERGIA_SUFICIENTE",
-                k_sj_arcana_active = "O Arcano se revela...",
+                k_cd_zero_reversed = "ZERO_REVERSO: SEM_ENERGIA_SUFICIENTE",
+                k_cd_arcana_active = "O Arcano se revela...",
             },
         },
 }

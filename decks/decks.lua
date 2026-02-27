@@ -12,8 +12,8 @@ SMODS.Back{
     unlocked = true,
     discovered = true,
     config = {
-        joker1 = "j_sj_callingcard",
-        joker2 = "j_sj_shadowjimbo"
+        joker1 = "j_cd_callingcard",
+        joker2 = "j_cd_shadowjimbo"
     },
 
 apply = function(self)

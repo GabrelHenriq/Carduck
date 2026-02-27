@@ -3,17 +3,17 @@ SMODS.Challenge {
     atlas = "fade_out",
     jokers = {
         { id = 'j_pareidolia', eternal = true, edition = "negative"},
-        { id = 'j_sj_shadowjimbo', eternal = true, edition = "negative" },
-        { id = 'j_sj_shadowjimbo', eternal = true, edition = "negative" },
-        { id = 'j_sj_shadowjimbo', eternal = true, edition = "negative" },
-        { id = 'j_sj_shadowjimbo', eternal = true, edition = "negative" }
+        { id = 'j_cd_shadowjimbo', eternal = true, edition = "negative" },
+        { id = 'j_cd_shadowjimbo', eternal = true, edition = "negative" },
+        { id = 'j_cd_shadowjimbo', eternal = true, edition = "negative" },
+        { id = 'j_cd_shadowjimbo', eternal = true, edition = "negative" }
     },
     restrictions = {
         banned_cards = {
             { id = 'j_marble' },
             { id = 'j_certificate' },
             { id = 'j_dna' },
-            { id = 'j_sj_homunculus' },
+            { id = 'j_cd_homunculus' },
             { id = 'c_incantation' },
             { id = 'c_grim' },
             { id = 'c_familiar' },

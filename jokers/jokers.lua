@@ -302,7 +302,7 @@ calculate = function(self, card, context)
                         }))
 
                         return {
-                            message = localize("k_sj_arcana_active"),
+                            message = localize("k_cd_arcana_active"),
                             colour = G.C.PURPLE,
                             card = card
                         }
@@ -710,7 +710,7 @@ SMODS.Joker{
 
                 G.E_MANAGER:add_event(Event({
                     func = function()
-                        play_sound('sj_barkdog', random_pitch, 0.6)
+                        play_sound('cd_barkdog', random_pitch, 0.6)
                         return true
                     end
                 }))
@@ -1031,7 +1031,7 @@ SMODS.Joker {
                 }))
 
                 return {
-                    message = localize('k_sj_zero_reversed'),
+                    message = localize('k_cd_zero_reversed'),
                     saved = true,
                     colour = G.C.PURPLE
                 }
@@ -1150,7 +1150,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
             -- --- Nevermind ---
             if (self.config.center.set == 'Default' or self.config.center.set == 'Enhanced') then
-                if v.config.center.key == 'j_sj_nevermind' then
+                if v.config.center.key == 'j_cd_nevermind' then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
 
                     local card_to_upgrade = v
@@ -1161,7 +1161,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
                             attention_text({
                                 text = localize("k_upgrade_ex"),
-                                colour = G.C.SJ_RED,
+                                colour = G.C.CD_RED,
                                 scale = 0.6, 
                                 hold = 0.8,
                                 major = card_to_upgrade
@@ -1175,7 +1175,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
             -- --- Calling Card ---
             if (self.config.center.set == 'Default' or self.config.center.set == 'Enhanced') and self:is_face() then
-                if v.config.center.key == 'j_sj_callingcard' then
+                if v.config.center.key == 'j_cd_callingcard' then
                     v.ability.extra.x_mult = v.ability.extra.x_mult + v.ability.extra.gain
 
                     local card_to_upgrade = v
@@ -1186,12 +1186,12 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
                             attention_text({
                                 text = localize("k_upgrade_ex"),
-                                colour = G.C.SJ_WHITE,
+                                colour = G.C.CD_WHITE,
                                 scale = 0.6, 
                                 hold = 0.8,
                                 major = card_to_upgrade
                             })
-                            play_sound("sj_p5critical", 1, 1)
+                            play_sound("cd_p5critical", 1, 1)
                             return true
                         end
                     }))
@@ -1201,7 +1201,7 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
 
             -- Reaper ---
             if self.config.center.set == 'Joker' then
-                if v.config.center.key == 'j_sj_reaper' and v ~= self then
+                if v.config.center.key == 'j_cd_reaper' and v ~= self then
                     v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
 
                     local card_to_upgrade = v
