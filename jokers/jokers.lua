@@ -170,6 +170,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "reaper",
+    path = "j_reaper.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -179,6 +186,7 @@ SMODS.Sound({
     key = "barkdog",
     path = "barkdog.ogg"
 })
+
 
 SMODS.Joker{
     key = "callingcard",                                  --name used by the joker.    
@@ -301,7 +309,7 @@ SMODS.Joker{
     config = { extra = { odds = 3 } },
     pos = { x = 0, y = 0 },
     rarity = 3,
-    cost = 12,
+    cost = 8,
     blueprint_compat = true,
     eternal_compat = true,
     unlocked = true,
@@ -1094,7 +1102,7 @@ SMODS.Joker {
                 }))
 
                 return {
-                    message = "+50",
+                    message = "+" .. card.ability.extra.chips,
                     chip_mod = card.ability.extra.chips,
                     colour = G.C.BLUE,
                     card = card
@@ -1103,3 +1111,44 @@ SMODS.Joker {
         end
     end
 }
+
+SMODS.Joker {
+    key = "reaper",
+    atlas = "reaper",
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    rarity = 2,
+    cost = 7,
+    config = { extra = { chips = 0, gain = 40 }},
+    pos = { x = 0, y = 0 },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.gain, card.ability.extra.chips } }
+    end,
+    calculate = function(self, card, context)
+        if context.joker_main and card.ability.extra.chips > 0 then
+            return {
+                chip_mod = card.ability.extra.chips,
+                message = "+" .. card.ability.extra.chips .. " Chips",
+                colour = G.C.CHIPS
+            }
+        end
+    end
+}
+-- codigo p agir com o de cima (NÃO MEXER MT)
+local card_dissolve_ref = Card.start_dissolve
+function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
+    if self.config.center.set == 'Joker' then
+        if G.jokers and G.jokers.cards then
+            for _, v in ipairs(G.jokers.cards) do
+                if v.config.center.key == 'j_sj_reaper' and v ~= self then
+                    v.ability.extra.chips = v.ability.extra.chips + v.ability.extra.gain
+                    v:juice_up()
+                end
+            end
+        end
+    end
+    card_dissolve_ref(self, dissolve_colours, shelf_live, item_type)
+end
+-- Cabou o codigo acima, pode continuar

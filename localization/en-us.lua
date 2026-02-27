@@ -189,6 +189,16 @@ return {
                     }
                 },
             },
+            j_sj_reaper = {
+                name = "Reaper",
+                text = {
+                    {
+                        "Gains {C:blue}+#1#{} Chips when a joker",
+                        "is {C:red}destroyed{}",
+                        "{C:inactive}(Currently {C:blue}+#2#{} Chips){}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {

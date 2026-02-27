@@ -188,6 +188,16 @@ return {
                     }
                 },
             },
+            j_sj_reaper = {
+                name = "Ceifador",
+                text = {
+                    {
+                        "Ganha {C:blue}+#1#{} Fichas quando um curinga",
+                        "é {C:red}destruído{}",
+                        "{C:inactive}(Atualmente {C:blue}+#2#{} Fichas){}"
+                    }
+                },
+            },
         },
         Back = {
             b_sj_metadeck = {
