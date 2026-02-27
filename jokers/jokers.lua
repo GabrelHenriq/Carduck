@@ -1231,6 +1231,8 @@ function Card.start_dissolve(self, dissolve_colours, shelf_live, item_type)
                     end
                 end
             end
+        end
+    end
 
     card_dissolve_ref(self, dissolve_colours, shelf_live, item_type)
 end
