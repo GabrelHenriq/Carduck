@@ -188,16 +188,6 @@ return {
                     }
                 },
             },
-            j_cd_reaper = {
-                name = "Ceifador",
-                text = {
-                    {
-                        "Ganha {C:blue}+#1#{} Fichas quando um curinga",
-                        "é {C:red}destruído{}",
-                        "{C:inactive}(Atualmente {C:blue}+#2#{} {C:inactive}Fichas){}"
-                    }
-                },
-            },
             j_cd_nevermind = {
                 name = "Tantofaz",
                 text = {
@@ -224,6 +214,15 @@ return {
                     {
                         "{C:attention}Aumenta o nível{} da {C:blue}mão jogada{}",
                         "{C:inactive}({}{C:blue}#1#{} {C:inactive}mãos restantes){}",
+                    }
+                },
+            },
+            j_cd_fortune_cookie = {
+                name = "Biscoito da Sorte",
+                text = {
+                    {
+                        "{C:attention}No começo do blind{}, {C:green}1 em 2{} de chance",
+                        "de {C:red}se destruír{} e criar {C:attention}2{} {C:tarot}Cartas de tarô{} aleatorias",
                     }
                 },
             },

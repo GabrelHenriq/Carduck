@@ -189,16 +189,6 @@ return {
                     }
                 },
             },
-            j_cd_reaper = {
-                name = "Reaper",
-                text = {
-                    {
-                        "Gains {C:blue}+#1#{} Chips when a joker",
-                        "is {C:red}destroyed{}",
-                        "{C:inactive}(Currently {C:blue}+#2#{} {C:inactive}Chips){}"
-                    }
-                },
-            },
             j_cd_nevermind = {
                 name = "Nevermind",
                 text = {
@@ -225,6 +215,15 @@ return {
                     {
                         "{C:attention}Levels up{} played {C:blue}hand{}",
                         "{C:inactive}({}{C:blue}#1#{} {C:inactive}hands left){}",
+                    }
+                },
+            },
+            j_cd_fortune_cookie = {
+                name = "Fortune Cookie",
+                text = {
+                    {
+                        "{C:attention}On start of blind{}, {C:green}1 in 2{} chance",
+                        "to {C:red}destroy itself{} and create {C:attention}2{} {C:tarot}random Tarot{} cards",
                     }
                 },
             },
