@@ -1184,33 +1184,39 @@ SMODS.Joker {
     
     calculate = function(self, card, context)
         if context.setting_blind and not card.getting_sliced then
+
+            if #G.consumeables.cards + G.GAME.consumeable_buffer < G.consumeables.config.card_limit then
+                        
+                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer + 1
             
-            if pseudorandom('fortune_cookie') < G.GAME.probabilities.normal / card.ability.extra.odds then
+                if pseudorandom('fortune_cookie') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 
-                G.E_MANAGER:add_event(Event({
-                    func = function()
-                        SMODS.destroy_cards(card, nil, nil, true)
-                        return true
-                    end
-                }))
-                
-                for i = 1, 2 do
                     G.E_MANAGER:add_event(Event({
-                        trigger = 'after',
-                        delay = 0.4,
                         func = function()
-                            local tarot = create_card('Tarot', G.tarot_area)
-                            tarot:add_to_deck()
-                            G.tarot_area:emplace(tarot)
+                            SMODS.destroy_cards(card, nil, nil, true)
                             return true
                         end
                     }))
+                    
+                    for i = 1, 2 do
+                        G.E_MANAGER:add_event(Event({
+                            trigger = 'after',
+                            delay = 0.4,
+                            func = function()
+                                local new_card = create_card('Tarot', G.consumeables, nil, nil, nil, nil, nil, 'arc')
+                                new_card:add_to_deck()
+                                G.consumeables:emplace(new_card)
+                                G.GAME.consumeable_buffer = G.GAME.consumeable_buffer - 1
+                                return true
+                            end
+                        }))
+                    end
+                    
+                    return {
+                        message = localize('k_eaten_ex'),
+                        colour = G.C.RED
+                    }
                 end
-                
-                return {
-                    message = localize('k_eaten_ex'),
-                    colour = G.C.RED
-                }
             end
         end
     end
