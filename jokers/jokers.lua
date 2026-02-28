@@ -1208,7 +1208,6 @@ SMODS.Joker {
                 end
                 
                 return {
-                    self:juice_up(),
                     message = localize('k_eaten_ex'),
                     colour = G.C.RED
                 }
