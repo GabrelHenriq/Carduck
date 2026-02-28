@@ -218,6 +218,15 @@ return {
                     }
                 },
             },
+            j_cd_star_fruit = {
+                name = "Carambola",
+                text = {
+                    {
+                        "{C:attention}Aumenta o nível{} da {C:blue}mão jogada{}",
+                        "{C:inactive}({}{C:blue}#1#{} {C:inactive}mãos restantes){}",
+                    }
+                },
+            },
         },
         Back = {
             b_cd_metadeck = {

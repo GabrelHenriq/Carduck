@@ -219,6 +219,15 @@ return {
                     }
                 },
             },
+            j_cd_star_fruit = {
+                name = "Star Fruit",
+                text = {
+                    {
+                        "{C:attention}Levels up{} played {C:blue}hand{}",
+                        "{C:inactive}({}{C:blue}#1#{} {C:inactive}hands left){}",
+                    }
+                },
+            },
         },
         Back = {
             b_cd_metadeck = {

@@ -177,6 +177,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "star_fruit",
+    path = "j_star_fruit.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -1109,6 +1116,45 @@ SMODS.Joker {
                 message = "+" .. card.ability.extra.chips,
                 colour = G.C.CHIPS
             }
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "star_fruit",
+    atlas = "star_fruit",
+    rarity = 2,
+    cost = 5,
+    blueprint_compat = true,
+    eternal_compat = false,
+    unlocked = true,
+    discovered = true,
+    pos = { x = 0, y = 0 },
+    config = { extra = { hands_left = 5 } },
+    loc_vars = function(self, info_queue, card)
+        return { vars = { card.ability.extra.hands_left } }
+    end,
+    calculate = function(self, card, context)
+        if context.before then
+            return {
+                level_up = true,
+                message = localize('k_level_up_ex')
+            }
+        end
+        if context.after and not context.blueprint then 
+            if card.ability.extra.hands_left - 1 <= 0 then
+                SMODS.destroy_cards(card, nil, nil, true)
+                return {
+                    message = localize('k_eaten_ex'),
+                    colour = G.C.FILTER
+                }
+            else 
+                card.ability.extra.hands_left = card.ability.extra.hands_left -1 
+                return {
+                    message = card.ability.extra.hands_left .. '',
+                    colour = G.C.FILTER
+                }
+            end
         end
     end
 }
