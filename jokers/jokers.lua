@@ -184,6 +184,13 @@ SMODS.Atlas({
     py = 95
 })
 
+SMODS.Atlas({
+    key = "fortune_cookie",
+    path = "j_fortune_cookie.png",
+    px = 71,
+    py = 95
+})
+
 SMODS.Sound({
     key = "p5critical",
     path = "p5critical.ogg"
@@ -210,9 +217,9 @@ SMODS.Joker{
     atlas = 'callingcard',                                --atlas name, single sprites are deprecated.
 
 calculate = function(self, card, context)
-    if context.joker_main then
+    if context.joker_main and card.ability.extra.x_mult > 1 then
         return {
-        message = 'X' .. card.ability.extra.x_mult,
+        message = 'X' .. card.ability.extra.x_mult .. "Mult",
         Xmult_mod = card.ability.extra.x_mult
         }
     end
@@ -254,8 +261,8 @@ calculate = function(self, card, context)
                     SMODS.calculate_context({remove_playing_cards = true, removed = {card_to_destroy}})
                     
                     return {
+
                         card = card,
-                        message = "The true self.",
                         colour = G.C.RED
                     }
                 end
@@ -1153,6 +1160,57 @@ SMODS.Joker {
                 return {
                     message = card.ability.extra.hands_left .. '',
                     colour = G.C.FILTER
+                }
+            end
+        end
+    end
+}
+
+SMODS.Joker {
+    key = "fortune_cookie",
+    atlas = "fortune_cookie",
+    pos = { x = 0, y = 0 },
+    rarity = 1,
+    cost = 4,
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = false, 
+    eternal_compat = false, 
+    config = { extra = { odds = 2 } },
+    
+    loc_vars = function(self, info_queue, card)
+        return { vars = { G.GAME.probabilities.normal, card.ability.extra.odds } }
+    end,
+    
+    calculate = function(self, card, context)
+        if context.setting_blind and not card.getting_sliced then
+            
+            if pseudorandom('fortune_cookie') < G.GAME.probabilities.normal / card.ability.extra.chance then
+                
+                G.E_MANAGER:add_event(Event({
+                    func = function()
+                        SMODS.destroy_cards(card, nil, nil, true)
+                        return true
+                    end
+                }))
+                
+                for i = 1, 2 do
+                    G.E_MANAGER:add_event(Event({
+                        trigger = 'after',
+                        delay = 0.4,
+                        func = function()
+                            local tarot = create_card('Tarot', G.tarot_area)
+                            tarot:add_to_deck()
+                            G.tarot_area:emplace(tarot)
+                            return true
+                        end
+                    }))
+                end
+                
+                return {
+                    self:juice_up(),
+                    message = localize('k_eaten_ex'),
+                    colour = G.C.RED
                 }
             end
         end
