@@ -1185,7 +1185,7 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.setting_blind and not card.getting_sliced then
             
-            if pseudorandom('fortune_cookie') < G.GAME.probabilities.normal / card.ability.extra.chance then
+            if pseudorandom('fortune_cookie') < G.GAME.probabilities.normal / card.ability.extra.odds then
                 
                 G.E_MANAGER:add_event(Event({
                     func = function()

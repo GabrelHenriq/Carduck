@@ -222,7 +222,7 @@ return {
                 name = "Fortune Cookie",
                 text = {
                     {
-                        "{C:attention}On start of blind{}, {C:green}1 in 2{} chance",
+                        "{C:attention}On start of blind{}, {C:green}#1# in #2#{} chance",
                         "to {C:red}destroy itself{} and create {C:attention}2{} {C:tarot}random Tarot{} cards",
                     }
                 },

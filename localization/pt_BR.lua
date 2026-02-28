@@ -221,7 +221,7 @@ return {
                 name = "Biscoito da Sorte",
                 text = {
                     {
-                        "{C:attention}No começo do blind{}, {C:green}1 em 2{} de chance",
+                        "{C:attention}No começo do blind{}, {C:green}#1# em #2#{} de chance",
                         "de {C:red}se destruír{} e criar {C:attention}2{} {C:tarot}Cartas de tarô{} aleatorias",
                     }
                 },
